@@ -1,0 +1,4 @@
+#FUCNTION {getdate} {#FORMAT {result} {%t} {%Y%m%d}}
+#FUCNTION {gettime} {#FORMAT {result} {%t} {%T}}
+#FUCNTION {getdt} {#FORMAT {result} {%t} {%Y%m%d_%T}}
+

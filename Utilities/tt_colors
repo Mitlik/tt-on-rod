@@ -1,0 +1,44 @@
+#CLASS {colors} {OPEN}
+
+#VARIABLE {tt_clear_color} {<099>}
+
+#VARIABLE {tt_fg_azure} {<acf>}
+#VARIABLE {tt_fg_viridian} {<afc>}
+#VARIABLE {tt_fg_indigo} {<caf>}
+#VARIABLE {tt_fg_lime} {<cfa>}
+#VARIABLE {tt_fg_pink} {<fac>}
+#VARIABLE {tt_fg_orange} {<fca>}
+#VARIABLE {tt_fg_white} {<178>}
+#VARIABLE {tt_fg_red} {<218>}
+#VARIABLE {tt_fg_light_red} {<118>}
+#VARIABLE {tt_fg_brown} {<238>}
+#VARIABLE {tt_fg_yellow} {<838>}
+#VARIABLE {tt_fg_green} {<228>}
+#VARIABLE {tt_fg_light_green} {<128>}
+#VARIABLE {tt_fg_dark_blue} {<248>}
+#VARIABLE {tt_fg_blue} {<148>}
+#VARIABLE {tt_fg_cyan} {<268>}
+#VARIABLE {tt_fg_light_blue} {<168>}
+#VARIABLE {tt_fg_purple} {<258>}
+#VARIABLE {tt_fg_pink} {<158>}
+#VARIABLE {tt_fg_black} {<208>}
+#VARIABLE {tt_fg_dark_grey} {<108>}
+#VARIABLE {tt_fg_grey} {<278>}
+#VARIABLE {tt_fg_white} {<178>}
+
+#VARIABLE {tt_bg_azure} {<ACF>}
+#VARIABLE {tt_bg_viridian} {<AFC>}
+#VARIABLE {tt_bg_indigo} {<CAF>}
+#VARIABLE {tt_bg_lime} {<CFA>}
+#VARIABLE {tt_bg_pink} {<FAC>}
+#VARIABLE {tt_bg_orange} {<FCA>}
+#VARIABLE {tt_bg_red} {<881>}
+#VARIABLE {tt_bg_brown} {<883>}
+#VARIABLE {tt_bg_blue} {<884>}
+#VARIABLE {tt_bg_green} {<882>}
+#VARIABLE {tt_bg_cyan} {<886>}
+#VARIABLE {tt_bg_magenta} {<885>}
+#VARIABLE {tt_bg_black} {<880>}
+#VARIABLE {tt_bg_grey} {<887>}
+
+#CLASS {colors} {OPEN}
