@@ -41,4 +41,4 @@
 #VARIABLE {tt_bg_black} {<880>}
 #VARIABLE {tt_bg_grey} {<887>}
 
-#CLASS {colors} {OPEN}
+#CLASS {colors} {CLOSE}
