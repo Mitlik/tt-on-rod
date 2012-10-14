@@ -2,24 +2,24 @@
 #NOP rest without additional calls, unless you later wish to access services you
 #NOP have turned off in 'services.conf'.
 
+#NOP This variable tells the rest of everything where to read from. This is the
+#NOP same directory you use to read in 'main'.
+#VARIABLE {script_dir} {MUD}
+
 #MATH {TRUE}  {2==2}
 #MATH {FALSE} {2==1}
 #MATH {ON}    {2==2}
 #MATH {OFF}   {2==1}
 
-#NOP This variable tells the rest of everything where to read from. This is the
-#NOP same directory you use to read in 'main'.
-#VARIABLE {script_dir} {MUD}
+#NOP Read in Utilities
+#NOP =================
+#READ $script_dir/Utilities/time.tin
+#READ $script_dir/Utilities/mud_colors.tin
+#READ $script_dir/Utilities/tt_colors.tin
 
 #NOP Read in Configuration
 #NOP =====================
 #READ $script_dir/services.conf
-
-#NOP Read in Utilities
-#NOP =================
-#READ $script_dir/Utilities/time
-#READ $script_dir/Utilities/mud_colors
-#READ $script_dir/Utilities/tt_colors
 
 #NOP Read in selected Services
 #NOP =========================
