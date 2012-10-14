@@ -1,0 +1,86 @@
+#NOP This utility is to make logging in and tracking characters easier.
+
+#NOP This initialization value allows for worldlist to be in the worlddata
+#NOP class when the file is empty. The subsequent read appears to overwrite
+#NOP the intialization value.
+#CLASS {worlddata} {OPEN};
+#VARIABLE {worldlist} {{Tmp}{{host}{216.251.47.10}{port}{4000}}};
+#CLASS {worlddata} {CLOSE};
+#CLASS {worlddata} {READ} {$script_dir/Utilities/worlds.dat};
+
+#CLASS {worlds} {OPEN}
+#ALIAS {addworld} {
+    #CLASS {worlddata} {READ} {$script_dir/Utilities/worlds.dat};
+    #FORMAT {utility_worlds_session} {%n} {%1};
+    #IF {"%3" == ""} {
+        #SHOWME {Syntax: addworld <world> <host> <port> [<character> [<password> [<owner> [<class> [<comment>]]]]]};
+    };
+    #ELSEIF {! &{worldlist[$utility_worlds_session]}} {
+        #IF {"%4" == ""} {
+            #VARIABLE {worldlist[$utility_worlds_session]} {{host}{%2} {port}{%3}};
+            #SHOWME {The world $utility_worlds_session (%2 %3) has been added.};
+        };
+        #ELSE {
+            #FORMAT {utility_worlds_character} {%n} {%4};
+            #FORMAT {utility_worlds_owner} {%n} {%6};
+            #FORMAT {utility_worlds_class} {%n} {%7};
+            #VARIABLE {worldlist[$utility_worlds_session]} {{host}{%2} {port}{%3} {name}{$utility_worlds_character} {pw}{%5} {owner}{$utility_worlds_owner} {class}{$utility_worlds_class} {comment}{%8}};
+            #SHOWME {The world $utility_worlds_session (%2 %3) and the character $utility_worlds_character (%5) has been added.};
+            #UNVARIABLE {utility_worlds_%*};
+        };
+        #CLASS {worlddata} {WRITE} {$script_dir/Utilities/worlds.dat};
+    };
+    #ELSE { #SHOWME {The world %1 already exists.}; };
+};
+
+#ALIAS {deleteworld} {
+    #CLASS {worlddata} {READ} {$script_dir/Utilities/worlds.dat};
+    #FORMAT {utility_worlds_delete} {%n} {%1};
+    #IF {&{worldlist[$utility_worlds_delete]}} {
+        #UNVARIABLE {worldlist[$utility_worlds_delete]};
+        #CLASS {worlddata} {WRITE} {$script_dir/Utilities/worlds.dat};
+        #SHOWME {The world $utility_worlds_delete has been deleted.};
+    };
+    #ELSE {
+        #SHOWME {The world $utility_worlds_delete couldn't be found.};
+    };
+    #UNVARIABLE {utility_worlds_delete};
+}
+
+#ALIAS {connect} {cn %0};
+
+#ALIAS {cn} {
+    #FORMAT {utility_worlds_connect} {%n} {%1};
+    #IF {"%1" == ""} {
+        #ECHO {%h} {{ WORLD LIST }};
+        #FOREACH {$worldlist[]} {world} {
+            #ECHO {%-20s %s %s %s} {$world} {$worldlist[$world][host]} {$worldlist[$world][port]} {$worldlist[$world][name]}
+        }
+    };
+    #ELSEIF {&{worldlist[$utility_worlds_connect]}} {
+        #VAR {world} {$worldlist[$utility_worlds_connect]};
+
+        #NOP This section was an attempt to use events to control the login process
+        #NOP {#EVENT {SESSION CONNECTED} {
+	    #IF {&{worldlist[%0][name]}} {#%0 $worldlist[%0][name]};
+	    #IF {&{worldlist[%0][pw]}} {#%0 $worldlist[%0][pw]}; 
+	} nop};
+
+        #SESSION {$utility_worlds_connect} {$world[host]} {$world[port]};
+        #IF {&{worldlist[$utility_worlds_connect][pw]}} {
+            #$utility_worlds_connect $worldlist[$utility_worlds_connect][name];
+            #$utility_worlds_connect $worldlist[$utility_worlds_connect][pw];
+            #$utility_worlds_connect {
+                #READ $script_dir/Characters/$world[$utility_worlds_connect][name];
+                #DELAY {1} {#CR;#DELAY {1} {#CR}}
+            };
+        };
+    };
+    #ELSE {
+        #SHOWME {Couldn't find world $utility_worlds_connect.};
+    };
+    #UNVARIABLE {utility_worlds_connect};
+}
+
+#CLASS {worlds} {CLOSE}
+
