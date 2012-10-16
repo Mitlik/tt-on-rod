@@ -16,6 +16,7 @@
 #READ $script_dir/Utilities/time.tin
 #READ $script_dir/Utilities/mud_colors.tin
 #READ $script_dir/Utilities/tt_colors.tin
+#READ $script_dir/Utilities/worlds.tin
 
 #NOP Read in Configuration
 #NOP =====================
