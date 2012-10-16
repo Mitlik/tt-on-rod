@@ -24,5 +24,5 @@
 
 #NOP Read in selected Services
 #NOP =========================
-#IF {channel_highlight} {#READ $script_dir/Scripts/channel_highlight}
+#IF {channel_highlight} {#READ $script_dir/Modules/channel_highlights.tin}
 
