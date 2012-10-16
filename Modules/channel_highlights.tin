@@ -1,6 +1,6 @@
 #CLASS {channels} {OPEN}
 
-#VARIABLE {mud_chan_color} {$mud_light_blue}
+#VARIABLE {mud_chan_color} {$ansi_color_light_blue}
 
 #SUBSTITUTE {~^${mud_chan_color}%w ordertalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ot}%1 ordertalk%2 '%3'} {6}
 #SUBSTITUTE {~^${mud_chan_color}%* quest%? '%*'$} {${tt_fg_white}@gettime{} ${clr_qst}%1 quest%2 '%3'} {6}
