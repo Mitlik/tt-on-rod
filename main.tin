@@ -4,7 +4,7 @@
 
 #NOP This variable tells the rest of everything where to read from. This is the
 #NOP same directory you use to read in 'main'.
-#VARIABLE {script_dir} {MUD}
+#VARIABLE {script_dir} {tt-on-rod}
 
 #MATH {TRUE}  {2==2}
 #MATH {FALSE} {2==1}
