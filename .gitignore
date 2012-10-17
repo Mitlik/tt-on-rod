@@ -1,0 +1,5 @@
+# Need a directory for any logging scripts, but don't want to be commiting the
+# files themselves.
+Logs/
+!Logs/README
+

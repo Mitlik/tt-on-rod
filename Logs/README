@@ -1,0 +1,4 @@
+This directory is used by scripts to store logs. Tintin++ will not generate a
+directory, so this empty directory has been put under source control so it will
+checkout and be usable.
+
