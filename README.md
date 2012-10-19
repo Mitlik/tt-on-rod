@@ -3,9 +3,9 @@ About
 This project is to reimplement my MUD scripts so they aren't so embarrassing to
 share with friends. With that in mind I need to give some credits. At some
 point during the 1.x releases of Tintin++ I was referencing the scripts from
-the [website]<http://tintin.sourceforge.net/scripts/> that Scandum has made
+the [website](http://tintin.sourceforge.net/scripts/) that Scandum has made
 public domain. My own work is available under the
-[WTFPL]<http://sam.zoy.org/wtfpl/COPYING>.
+[WTFPL](http://sam.zoy.org/wtfpl/COPYING).
 
 Notes
 =====
@@ -30,13 +30,17 @@ The basic layout should be something like:
       +-Characters: where character specific files go
       +-Logs: this is the default folders should write logs to
       +-Modules: where RoD specific scripts are stored
-      +-Utilities: where generic scripts are stored (i.e. scripts that only deal with Tintin)
-      +-main.tin: this one file should read in everything you need in #gts and to load up your characters
-      +-modules.conf: this turns modules on and off, and may define variables for those modules
+      +-Utilities: where generic scripts are stored (i.e. scripts that only
+        deal with Tintin)
+      +-main.tin: this one file should read in everything you need in #gts and
+        to load up your characters
+      +-modules.conf: this turns modules on and off, and may define variables
+        for those modules
 
 Types of files:
      .tin | Contain aliases, functions, actions, etc.
-     .dat | Contain only data for use in another script (e.g. character listing or equipment damage listing)
+     .dat | Contain only data for use in another script (e.g. character listing
+          | or equipment damage listing)
     .conf | Setup variables that a user might change
 
 Road Map
@@ -46,7 +50,8 @@ some neat ideas to include.
 
 Version 1
 ---------
-Milestone goal: Help make tintin easier to use for logging in and offer some neat features
+Milestone goal: Help make tintin easier to use for logging in and offer some
+neat features
 [X] Simplified connect with stored character data
 [ ] Simple speed walk with storage: check vs built-in speedwalk
 [ ] Basic MSDP
