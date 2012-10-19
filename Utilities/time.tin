@@ -4,5 +4,19 @@
 #FUNCTION {gettime} {#FORMAT {result} {%t} {%T}}
 #FUNCTION {getdt} {#FORMAT {result} {%t} {%Y%m%d_%T}}
 
+#FUNCTION {get_tdiff} {
+    #FORMAT {now} {%T};
+    #MATH {result} {$now - %1};
+    #UNVARIABLE {now};
+}
+#FUNCTION {parse_tdiff} {
+    #MATH {tdiff_min} {%1 % (24*3600) / 60};
+    #MATH {tdiff_sec} {%1 % (24*3600) % 60};
+    #VARIABLE {result} {${tdiff_min}:};
+    #IF {$tdiff_sec < 10} {#VARIABLE {result} {${result}0};};
+    #VARIABLE {result} {${result}$tdiff_sec};
+    #UNVARIABLE {tdiff_min};
+    #UNVARIABLE {tdiff_sec};
+}
 #CLASS {utilities} {CLOSE}
 
