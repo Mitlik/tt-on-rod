@@ -3,3 +3,7 @@
 Logs/
 !Logs/README
 
+# File contains sensative information. There's no need to include it in the
+# structure, as the scripts can write to it without it existing.
+Utilities/worlds.dat
+
