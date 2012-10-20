@@ -52,27 +52,27 @@ Version 1
 ---------
 Milestone goal: Help make tintin easier to use for logging in and offer some
 neat features
-[X] Simplified connect with stored character data
-[ ] Simple speed walk with storage: check vs built-in speedwalk
-[ ] Basic MSDP
-[ ] Basic battle scripts
-    [ ] Disarm
-    [ ] Cure blind if true sight < gouge/blind
+    [X] Simplified connect with stored character data
+    [ ] Simple speed walk with storage: check vs built-in speedwalk
+    [ ] Basic MSDP
+    [ ] Basic battle scripts
+        [ ] Disarm
+        [ ] Cure blind if true sight < gouge/blind
 
 Version 2
 ---------
 Milestone goal: Improve scripts to be more useful
-[ ] Have option to encrypt character passwords
-[ ] Search data for certain criterion
-    [ ] Characters
-    [ ] Speedwalks/Areas
-[ ] Unfailing spell bots
-[ ] Alexian compatible auction logging
-    [ ] bash script to merge log into db source and pick out obvious repeats
+    [ ] Have option to encrypt character passwords
+    [ ] Search data for certain criterion
+        [ ] Characters
+        [ ] Speedwalks/Areas
+    [ ] Unfailing spell bots
+    [ ] Alexian compatible auction logging
+        [ ] bash script to merge log into db source and pick out obvious repeats
 
 Version 3
 ---------
 Milestone goal: Add some features that might be considered ridiculous
-[ ] Auto-CR (spam visit deities only)
-[ ] Auto-Fight
+    [ ] Auto-CR (spam visit deities only)
+    [ ] Auto-Fight
 
