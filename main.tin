@@ -1,10 +1,13 @@
 #NOP This is the main file to this tinscript suite, this file should read in the
 #NOP rest without additional calls, unless you later wish to access services you
-#NOP have turned off in 'services.conf'.
+#NOP have turned off in 'conf.d/modules.conf'.
 
 #NOP This variable tells the rest of everything where to read from. This is the
 #NOP same directory you use to read in 'main'.
 #VARIABLE {script_dir} {tt-on-rod}
+
+#NOP Utilities contain system based dependencies
+#READ $script_dir/conf.d/system.conf
 
 #MATH {TRUE}  {2==2}
 #MATH {FALSE} {2==1}
@@ -20,9 +23,9 @@
 
 #NOP Read in Configuration
 #NOP =====================
-#READ $script_dir/services.conf
+#READ $script_dir/conf.d/modules.conf
 
-#NOP Read in selected Services
-#NOP =========================
-#IF {channel_highlight} {#READ $script_dir/Modules/channel_highlights.tin}
+#NOP Read in selected modules
+#NOP ========================
+#IF {$channel_highlight} {#READ $script_dir/Modules/channel_highlights.tin}
 
