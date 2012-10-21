@@ -4,6 +4,14 @@
 #FUNCTION {gettime} {#FORMAT {result} {%t} {%T}}
 #FUNCTION {getdt} {#FORMAT {result} {%t} {%Y%m%d_%T}}
 
+#NOP {Get the UTC offset to calculate local time};
+#IF {&{LINUX} && $LINUX} {
+    #SCRIPT {UTC_OFFSET} {date +%z};
+    #VARIABLE {UTC_OFFSET} {$UTC_OFFSET[1]};
+    #REPLACE {UTC_OFFSET} {0} {};
+}
+#NOP {Wintin++ 2.00.8 crashes when I run #SCRIPT on Win7, may have to make some kind of batch script to get "REG QUERY HKLM\System\CurrentControlSet\Control\TimeZoneInformation /v ActiveTimeBias" into base 10};
+
 #FUNCTION {get_tdiff} {
     #FORMAT {now} {%T};
     #MATH {result} {$now - %1};
@@ -17,6 +25,27 @@
     #VARIABLE {result} {${result}$tdiff_sec};
     #UNVARIABLE {tdiff_min};
     #UNVARIABLE {tdiff_sec};
+}
+#FUNCTION {epoch2time} {
+    #IF {"%1" == ""} {#SHOWME {Usage: epoch2time epoch [SHOW_SECONDS]};};
+    #NOP {Get times from epoch};
+    #MATH {epoch_hour} {%1 % (24*60*60) / (60*60)};
+    #MATH {epoch_minute} {%1 % (24*60*60) % (60*60) / 60};
+    #MATH {epoch_second} {%1 % (24*60*60) % (60*60) % 60};
+
+    #NOP {Now we need to get the right hour for local time};
+    #MATH {epoch_hour} {($epoch_hour + 24 + $UTC_OFFSET) % 24};
+
+    #NOP {Now to format};
+    #FORMAT {epoch_hour} {%+2s} {$epoch_hour};
+    #REPLACE {epoch_hour} { } {0};
+    #FORMAT {epoch_minute} {%+2s} {$epoch_minute};
+    #REPLACE {epoch_minute} { } {0};
+    #FORMAT {epoch_second} {%+2s} {$epoch_second};
+    #REPLACE {epoch_second} { } {0};
+    
+    #VARIABLE {result} {${epoch_hour}:${epoch_minute}:${epoch_second}};
+    #IF {!%2} {#FORMAT {result} {%.5s} {$result};};
 }
 #CLASS {utilities} {CLOSE}
 
