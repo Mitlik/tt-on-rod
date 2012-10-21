@@ -1,125 +1,125 @@
 #CLASS {RepopMessages} {OPEN}
 
-#ACTION {^${mud_color[repop]}The whirr of magical machinery is heard as the chessboard resets for its next player.$} {repop Glimwinkle's Chessboard}
-#ACTION {^${mud_color[repop]}The incessant grinding sound of the windmill ceases for a moment, then clunks back into its regular rhythm.$} {repop glim wind}
-#ACTION {^${mud_color[repop]}Dust settles within the temple, as another pilgrim searches for Immortality.$} {repop Florebit In Immortalis Iuvenis}
-#ACTION {^${mud_color[repop]}A flock of crows wings over the forest.$} {repop A Moment in Nature}
-#ACTION {^${mud_color[repop]}A symphony of madness arises from the depths of the Abattoir Asylum as dark powers renew maniacal life...$} {repop Abattoir}
-#ACTION {^${mud_color[repop]}The grating cry of a raven is heard in the distance but fades away unanswered.$} {repop Abishai's Morgue}
-#ACTION {^${mud_color[repop]}With a slow creak, the trees move in the wind.$} {repop Along the Forest Path}
-#ACTION {^${mud_color[repop]}A soothing feeling surrounds Aurora as peace is restored.$} {repop Ancient City of Aurora}
-#ACTION {^${mud_color[repop]}Dark waves shift slowly between past and present...$} {repop Antall, the Lost Harbor}
-#ACTION {^${mud_color[repop]}The struggle for dominance continues...$} {repop Asgard Nexus}
-#ACTION {^${mud_color[repop]}A scream is heard from deep within the Ashen Forest.$} {repop Ashen Forest}
-#ACTION {^${mud_color[repop]}The astral field glitters with a thousand points of light for a moment...$} {repop Astral Plane}
-#ACTION {^${mud_color[repop]}The endless eastern ocean draws your mind into a daze...$} {repop Azure Sea}
-#ACTION {^${mud_color[repop]}An eerie howl echoes through the rocky peaks, sending shivers down your spine...$} {repop Barren Peaks of Tahjliera}
-#ACTION {^${mud_color[repop]}You hear the scurry of feet behind you ... BIG feet!$} {repop Barrik's Keep}
-#ACTION {^${mud_color[repop]}Like a fine wine, things improve with age.$} {repop Bartok Grove}
-#ACTION {^${mud_color[repop]}The ashy winds blow about you, leaving you covered in a film of dust and sand.$} {repop Blasted Lands}
-#ACTION {^${mud_color[repop]}The ocean bleeds new life...$} {repop Blood Sea}
-#ACTION {^${mud_color[repop]}A blast from Triton's horn signifies the battle of good versus evil rages on.$} {repop Coral Depths}
-#ACTION {^${mud_color[repop]}The haunting voice drifts over the water in song.$} {repop Crystalmir Lake}
-#ACTION {^${mud_color[repop]}The desecrated Clan Tree mourns for a more prosperous time.$} {repop Cursed Lands}
-#ACTION {^${mud_color[repop]}A low murmur echoes through the Gallery as more critics enter the building.$} {repop Darkhaven Art Gallery}
-#ACTION {^${mud_color[repop]}Hot, arid winds roll off the sands of the great desert....$} {repop Desert of Despair}
-#ACTION {^${mud_color[repop]}A hollow chant can be heard from somewhere far below...$} {repop Dragon Cult}
-#ACTION {^${mud_color[repop]}The cries of sparring dragons echo eerily in the distance.$} {repop Dragon Tower}
-#ACTION {^${mud_color[repop]}The cry of a hungry dragon echoes throughout the pass as it takes flight.$} {repop Dragon's Pass}
-#ACTION {^${mud_color[repop]}A solemn chant begins in the distance.$} {repop Drow City}
-#ACTION {^${mud_color[repop]}You hear the echo of a prisoner screaming.$} {repop Dungeon}
-#ACTION {^${mud_color[repop]}The wail of the Hunter's horn echoes across the forests...$} {repop Dunhill Demesnes}
-#ACTION {^${mud_color[repop]}The sound of shuffling footsteps is audible behind you...$} {repop Dwarven Catacombs}
-#ACTION {^${mud_color[repop]}The winds of change swirl around you like a bad Van Gogh.$} {repop Dylan's Area}
-#ACTION {^${mud_color[repop]}The sounds of a wagon clattering down the road can be heard in the distance.$} {repop Eastern Trade Route}
-#ACTION {^${mud_color[repop]}New elements arise to join the war against each other.$} {repop Elemental Canyon}
-#ACTION {^${mud_color[repop]}A cool breeze blows in from the Emerald Hills...$} {repop Emerald Hills}
-#ACTION {^${mud_color[repop]}The forest begins to swell in the heat, enveloping its occupants.$} {repop Forest of Tears}
-#ACTION {^${mud_color[repop]}The howl of a wolf echoes in the distance...$} {repop Forgotten Woods}
-#ACTION {^${mud_color[repop]}With a big bang, the Galaxy begins anew...$} {repop Galaxy}
-#ACTION {^${mud_color[repop]}A hoarse battlecry echoes over the hills.$} {repop Gauntlet}
-#ACTION {^${mud_color[repop]}A howl echoes mournfully from the nearby forest...$} {repop Graveyard}
-#ACTION {^${mud_color[repop]}The desert sands whip madly about you...$} {repop Great Eastern Desert}
-#ACTION {^${mud_color[repop]}The ancient trees almost seem to grow a little as they continue to age.$} {repop Green Forest}
-#ACTION {^${mud_color[repop]}The spirit guides roam the halls, in search of new students.$} {repop Halls of Knowledge}
-#ACTION {^${mud_color[repop]}The Cathedral bell echoes throughout the land, as a solemn epitaph to the dead.$} {repop Haven of Everlasting Light}
-#ACTION {^${mud_color[repop]}A mass of tingling magic envelops you...$} {repop High Tower of Sorcery}
-#ACTION {^${mud_color[repop]}The disgusting cry of a large beast rings through the air, followed by the sounds of battle.$} {repop Keep of Mahn-tor}
-#ACTION {^${mud_color[repop]}Strains of soft music echo throughout the ancient halls.$} {repop King's Castle}
-#ACTION {^${mud_color[repop]}A loud cheer erupts as another group of dwarves strikes a vein of precious ore.$} {repop Kingdom of Juargan}
-#ACTION {^${mud_color[repop]}A Knight cries out, "A King without a sword... a land without a King!"$} {repop Knights of the Round}
-#ACTION {^${mud_color[repop]}Another scream is heard as balrog and elf wage battle.$} {repop Kontaur}
-#ACTION {^${mud_color[repop]}A fine mist fills the air as the forces of the warring magie clash in an eternal battle...$} {repop La Chute D'eau De L'ancients}
-#ACTION {^${mud_color[repop]}The cry of a loon echoes across the rippling surface of the loch.$} {repop Lake of Tich'Pyga}
-#ACTION {^${mud_color[repop]}From the bowels of this blackened mountain, a sharp cracking can be heard...$} {repop Land of the Fire Newts}
-#ACTION {^${mud_color[repop]}A violet, mechanical sound rises from below and dissipates like mist.$} {repop Machine Dreams}
-#ACTION {^${mud_color[repop]}Black clouds obscure the peaks of Mount Doom and build with intensity...$} {repop Miden'nir}
-#ACTION {^${mud_color[repop]}The gurgling of the swamp can be heard around you...$} {repop Mire}
-#ACTION {^${mud_color[repop]}Mithril Hall rumbles as a deep cry erupts from Garumn's Gorge...$} {repop Mithril Hall}
-#ACTION {^${mud_color[repop]}A chorus of orcs begins to sing "Where there's a whip, there's a way!"$} {repop Morgul Vale}
-#ACTION {^${mud_color[repop]}The silence is shattered as Moria's denizens awaken from slumber...$} {repop Moria}
-#ACTION {^${mud_color[repop]}Deep within the mountain, a tormented cry is heard as another soul is lost.$} {repop Mountain of Lost Souls}
-#ACTION {^${mud_color[repop]}The wind around you howls the mournful tune of time past.$} {repop Mountains of Desolation}
-#ACTION {^${mud_color[repop]}A flock of ravens circles ominously, their haunting caws broken by the whispering wind.$} {repop Nevermore}
-#ACTION {^${mud_color[repop]}Trumpets blare throughout Darkhaven, proclaiming a changing of the guard.$} {repop New Darkhaven}
-#ACTION {^${mud_color[repop]}Marshall Diana's footsteps can be heard patrolling the streets.$} {repop New Ofcol}
-#ACTION {^${mud_color[repop]}Waves of wind wash through the tall grass like an ocean.$} {repop Northern Plains}
-#ACTION {^${mud_color[repop]}The wind picks up along the lonely road, blowing debris and dust into the surrounding wilderness.$} {repop Northern Trade Route}
-#ACTION {^${mud_color[repop]}A ship's bell clangs in the distance.$} {repop Ocean Keep}
-#ACTION {^${mud_color[repop]}Time erodes the earth slightly further.$} {repop Ockwater Fens}
-#ACTION {^${mud_color[repop]}Clouds of silt erupt about you as yet another storm churns the waters about...$} {repop Octopus Garden}
-#ACTION {^${mud_color[repop]}The hallowed echoes of magicks lost echo somewhere in the darkness. Ofcol}
-#ACTION {^${mud_color[repop]}Shadowed figures rise from their watery graves...$} {repop Old Marsh}
-#ACTION {^${mud_color[repop]}You hear some squeaking sounds...$} {repop Old Thalos}
-#ACTION {^${mud_color[repop]}Thunder echoes from the skies as the Gods continue to battle against this existence...$} {repop Olympus}
-#ACTION {^${mud_color[repop]}The temperature plummets as a storm moves in...$} {repop Otherland}
-#ACTION {^${mud_color[repop]}A pixie pops into view then flutters away, giggling...$} {repop Pixie Forest}
-#ACTION {^${mud_color[repop]}You feel a chill in your bones as time passes...$} {repop Raven Tor}
-#ACTION {^${mud_color[repop]}A quiet murmur trails through the cavern ...$} {repop Realm of Worship}
-#ACTION {^${mud_color[repop]}As if expecting Redferne, everything returns to the way it was before he left.$} {repop Redferne's Residence}
-#ACTION {^${mud_color[repop]}All grows silent as another falls from grace...$} {repop Revelation City}
-#ACTION {^${mud_color[repop]}Dark sands twist and swirl like a gypsy dancer through hellfire...$} {repop Scourge of Time}
-#ACTION {^${mud_color[repop]}Whispers of loves and battles lost can be heard over the ocean breezes...$} {repop Sea of Sorrows}
-#ACTION {^${mud_color[repop]}The cry of a Skulk can be heard in the distance...$} {repop Sentinel}
-#ACTION {^${mud_color[repop]}The air around you heats and shimmers, as if consumed by flame ...$} {repop Seth's Fortress} 
-#ACTION {^${mud_color[repop]}The sound of rushing water can be heard echoing through the wasteland.$} {repop Sewer}
-#ACTION {^${mud_color[repop]}A blanket of fog crawls out of the forest...$} {repop Shadow Grove}
-#ACTION {^${mud_color[repop]}A wave of cold passes through you, inspiring dread despair...$} {repop Shadowport}
-#ACTION {^${mud_color[repop]}A hiss of corrosion seeps from the darkness...$} {repop Shai'Ghool}
-#ACTION {^${mud_color[repop]}The earth rumbles with the after-affects of another experiment gone awry...$} {repop Shattered Refuge}
-#ACTION {^${mud_color[repop]}The streets bustle with the sounds of tiny feet on the move.$} {repop Shire}
-#ACTION {^${mud_color[repop]}The rocks, hills and mountains continue to age with the world.$} {repop Southern Mountain Range}
-#ACTION {^${mud_color[repop]}A strange, serene feeling ripples through your body, putting you at ease.$} {repop Temple of the Moon}
-#ACTION {^${mud_color[repop]}Swirls of dust dance as the wind howls through the empty streets...$} {repop Thalos}
-#ACTION {^${mud_color[repop]}A rhythmic chanting weaves its spell upon the desert wind...$} {repop Thul Ab'hara}
-#ACTION {^${mud_color[repop]}Tortured screams echo throughout the tower, crying in supplication.$} {repop Tower of Despair}
-#ACTION {^${mud_color[repop]}Cries, screams, and laughter can be heard from the Tower's inhabitants...$} {repop Tower of Enlightenment}
-#ACTION {^${mud_color[repop]}Wails of distress can be heard off in the distance.$} {repop Tower of Zenothir}
-#ACTION {^${mud_color[repop]}The town crier's call rises above the din of the city.$} {repop Town of Solace}
-#ACTION {^${mud_color[repop]}An air of expectancy descends over the town, as the dead come home...$} {repop Transylvania}
-#ACTION {^${mud_color[repop]}Branches rustle above as life continues ever onward...$} {repop Tree of Life}
-#ACTION {^${mud_color[repop]}The branches rustle as creatures move in search of food.$} {repop Treetops and Canopy}
-#ACTION {^${mud_color[repop]}A woman's nagging voice echoes from the manor house...$} {repop Tullfuhrzky Manor}
-#ACTION {^${mud_color[repop]}A sense of overwhelming malevolence seeps from the very heart of the underworld...$} {repop Underworld}
-#ACTION {^${mud_color[repop]}The grief of mourners is audible throughout the burial ground...$} {repop Unholy Grounds}
-#ACTION {^${mud_color[repop]}A lone wail wells up in the distance only to fade into the shadows.$} {repop Valley of Mysts}
-#ACTION {^${mud_color[repop]}Elvish laughter drifts on the wind as you wander through the valley...$} {repop Valley of the Elves}
-#ACTION {^${mud_color[repop]}A cloud passes by the sun as the rice fields are gently caressed by the wind.$} {repop Village of Edo}
-#ACTION {^${mud_color[repop]}You hear a small child scream for his mommy.$} {repop Warehouse}
-#ACTION {^${mud_color[repop]}A sudden burst of wind blows hollowly over the barren wastelands.$} {repop Wastelands}
-#ACTION {^${mud_color[repop]}The floorboards creak as the house begins to settle.$} {repop Wendle Mansion}
-#ACTION {^${mud_color[repop]}High above the open road, the shrill cry of a falcon can be heard.$} {repop Western Trading Route}
-#ACTION {^${mud_color[repop]}The antarctic winds rise to a plaintive whine then die out...$} {repop Wild Tundra}
-#ACTION {^${mud_color[repop]}The caw of a flying beast echoes through the misty tower.$} {repop Wyvern's Tower}
-#ACTION {^${mud_color[repop]}A swift blow to end defiance, a thousand voices silenced in fire...$} {repop Ziggurat}
-#ACTION {^${mud_color[repop]}A foul wind blows through the city, bringing with it despair and regret.$} {repop Salburg}
-#ACTION {^${mud_color[repop]}The walls of the mausoleum drip with blood as the dead rise once more.$} {repop Von Duesen}
-#ACTION {^${mud_color[repop]}They say this mystery never shall cease: The priest promotes war, and the warrior peace.$} {repop The Valley of Crucifixion}
-#ACTION {^${mud_color[repop]}In the deathly silence, dust settles and misery invades the unwary mind...$} {repop Daichaal} 
-#ACTION {^${mud_color[repop]}The ancient temple shudders as the memories of a more innocent time fade into shadow.$} {repop Shattered Temple}
-#ACTION {^${mud_color[repop]}Sloshing, bubbling noises emerge from deep within the earth.$} {repop Slime Pit}
-#ACTION {^${mud_color[repop]}Distant rumblings resonate through the fissure from far below.$} {repop Mulciber's Forge}
-#ACTION {^${mud_color[repop]}From the darkest shadow, a new prophecy is born...$} {repop Reign of Madness}
-#ACTION {^${mud_color[repop]}A bloodcurdling scream is heard in the distance, as another meets their fate...$} {repop Badlands}
+#ACTION {~^${mud_color[repop]}The whirr of magical machinery is heard as the chessboard resets for its next player.$} {repop Glimwinkle's Chessboard}
+#ACTION {~^${mud_color[repop]}The incessant grinding sound of the windmill ceases for a moment, then clunks back into its regular rhythm.$} {repop glim wind}
+#ACTION {~^${mud_color[repop]}Dust settles within the temple, as another pilgrim searches for Immortality.$} {repop Florebit In Immortalis Iuvenis}
+#ACTION {~^${mud_color[repop]}A flock of crows wings over the forest.$} {repop A Moment in Nature}
+#ACTION {~^${mud_color[repop]}A symphony of madness arises from the depths of the Abattoir Asylum as dark powers renew maniacal life...$} {repop Abattoir}
+#ACTION {~^${mud_color[repop]}The grating cry of a raven is heard in the distance but fades away unanswered.$} {repop Abishai's Morgue}
+#ACTION {~^${mud_color[repop]}With a slow creak, the trees move in the wind.$} {repop Along the Forest Path}
+#ACTION {~^${mud_color[repop]}A soothing feeling surrounds Aurora as peace is restored.$} {repop Ancient City of Aurora}
+#ACTION {~^${mud_color[repop]}Dark waves shift slowly between past and present...$} {repop Antall, the Lost Harbor}
+#ACTION {~^${mud_color[repop]}The struggle for dominance continues...$} {repop Asgard Nexus}
+#ACTION {~^${mud_color[repop]}A scream is heard from deep within the Ashen Forest.$} {repop Ashen Forest}
+#ACTION {~^${mud_color[repop]}The astral field glitters with a thousand points of light for a moment...$} {repop Astral Plane}
+#ACTION {~^${mud_color[repop]}The endless eastern ocean draws your mind into a daze...$} {repop Azure Sea}
+#ACTION {~^${mud_color[repop]}An eerie howl echoes through the rocky peaks, sending shivers down your spine...$} {repop Barren Peaks of Tahjliera}
+#ACTION {~^${mud_color[repop]}You hear the scurry of feet behind you ... BIG feet!$} {repop Barrik's Keep}
+#ACTION {~^${mud_color[repop]}Like a fine wine, things improve with age.$} {repop Bartok Grove}
+#ACTION {~^${mud_color[repop]}The ashy winds blow about you, leaving you covered in a film of dust and sand.$} {repop Blasted Lands}
+#ACTION {~^${mud_color[repop]}The ocean bleeds new life...$} {repop Blood Sea}
+#ACTION {~^${mud_color[repop]}A blast from Triton's horn signifies the battle of good versus evil rages on.$} {repop Coral Depths}
+#ACTION {~^${mud_color[repop]}The haunting voice drifts over the water in song.$} {repop Crystalmir Lake}
+#ACTION {~^${mud_color[repop]}The desecrated Clan Tree mourns for a more prosperous time.$} {repop Cursed Lands}
+#ACTION {~^${mud_color[repop]}A low murmur echoes through the Gallery as more critics enter the building.$} {repop Darkhaven Art Gallery}
+#ACTION {~^${mud_color[repop]}Hot, arid winds roll off the sands of the great desert....$} {repop Desert of Despair}
+#ACTION {~^${mud_color[repop]}A hollow chant can be heard from somewhere far below...$} {repop Dragon Cult}
+#ACTION {~^${mud_color[repop]}The cries of sparring dragons echo eerily in the distance.$} {repop Dragon Tower}
+#ACTION {~^${mud_color[repop]}The cry of a hungry dragon echoes throughout the pass as it takes flight.$} {repop Dragon's Pass}
+#ACTION {~^${mud_color[repop]}A solemn chant begins in the distance.$} {repop Drow City}
+#ACTION {~^${mud_color[repop]}You hear the echo of a prisoner screaming.$} {repop Dungeon}
+#ACTION {~^${mud_color[repop]}The wail of the Hunter's horn echoes across the forests...$} {repop Dunhill Demesnes}
+#ACTION {~^${mud_color[repop]}The sound of shuffling footsteps is audible behind you...$} {repop Dwarven Catacombs}
+#ACTION {~^${mud_color[repop]}The winds of change swirl around you like a bad Van Gogh.$} {repop Dylan's Area}
+#ACTION {~^${mud_color[repop]}The sounds of a wagon clattering down the road can be heard in the distance.$} {repop Eastern Trade Route}
+#ACTION {~^${mud_color[repop]}New elements arise to join the war against each other.$} {repop Elemental Canyon}
+#ACTION {~^${mud_color[repop]}A cool breeze blows in from the Emerald Hills...$} {repop Emerald Hills}
+#ACTION {~^${mud_color[repop]}The forest begins to swell in the heat, enveloping its occupants.$} {repop Forest of Tears}
+#ACTION {~^${mud_color[repop]}The howl of a wolf echoes in the distance...$} {repop Forgotten Woods}
+#ACTION {~^${mud_color[repop]}With a big bang, the Galaxy begins anew...$} {repop Galaxy}
+#ACTION {~^${mud_color[repop]}A hoarse battlecry echoes over the hills.$} {repop Gauntlet}
+#ACTION {~^${mud_color[repop]}A howl echoes mournfully from the nearby forest...$} {repop Graveyard}
+#ACTION {~^${mud_color[repop]}The desert sands whip madly about you...$} {repop Great Eastern Desert}
+#ACTION {~^${mud_color[repop]}The ancient trees almost seem to grow a little as they continue to age.$} {repop Green Forest}
+#ACTION {~^${mud_color[repop]}The spirit guides roam the halls, in search of new students.$} {repop Halls of Knowledge}
+#ACTION {~^${mud_color[repop]}The Cathedral bell echoes throughout the land, as a solemn epitaph to the dead.$} {repop Haven of Everlasting Light}
+#ACTION {~^${mud_color[repop]}A mass of tingling magic envelops you...$} {repop High Tower of Sorcery}
+#ACTION {~^${mud_color[repop]}The disgusting cry of a large beast rings through the air, followed by the sounds of battle.$} {repop Keep of Mahn-tor}
+#ACTION {~^${mud_color[repop]}Strains of soft music echo throughout the ancient halls.$} {repop King's Castle}
+#ACTION {~^${mud_color[repop]}A loud cheer erupts as another group of dwarves strikes a vein of precious ore.$} {repop Kingdom of Juargan}
+#ACTION {~^${mud_color[repop]}A Knight cries out, "A King without a sword... a land without a King!"$} {repop Knights of the Round}
+#ACTION {~^${mud_color[repop]}Another scream is heard as balrog and elf wage battle.$} {repop Kontaur}
+#ACTION {~^${mud_color[repop]}A fine mist fills the air as the forces of the warring magie clash in an eternal battle...$} {repop La Chute D'eau De L'ancients}
+#ACTION {~^${mud_color[repop]}The cry of a loon echoes across the rippling surface of the loch.$} {repop Lake of Tich'Pyga}
+#ACTION {~^${mud_color[repop]}From the bowels of this blackened mountain, a sharp cracking can be heard...$} {repop Land of the Fire Newts}
+#ACTION {~^${mud_color[repop]}A violet, mechanical sound rises from below and dissipates like mist.$} {repop Machine Dreams}
+#ACTION {~^${mud_color[repop]}Black clouds obscure the peaks of Mount Doom and build with intensity...$} {repop Miden'nir}
+#ACTION {~^${mud_color[repop]}The gurgling of the swamp can be heard around you...$} {repop Mire}
+#ACTION {~^${mud_color[repop]}Mithril Hall rumbles as a deep cry erupts from Garumn's Gorge...$} {repop Mithril Hall}
+#ACTION {~^${mud_color[repop]}A chorus of orcs begins to sing "Where there's a whip, there's a way!"$} {repop Morgul Vale}
+#ACTION {~^${mud_color[repop]}The silence is shattered as Moria's denizens awaken from slumber...$} {repop Moria}
+#ACTION {~^${mud_color[repop]}Deep within the mountain, a tormented cry is heard as another soul is lost.$} {repop Mountain of Lost Souls}
+#ACTION {~^${mud_color[repop]}The wind around you howls the mournful tune of time past.$} {repop Mountains of Desolation}
+#ACTION {~^${mud_color[repop]}A flock of ravens circles ominously, their haunting caws broken by the whispering wind.$} {repop Nevermore}
+#ACTION {~^${mud_color[repop]}Trumpets blare throughout Darkhaven, proclaiming a changing of the guard.$} {repop New Darkhaven}
+#ACTION {~^${mud_color[repop]}Marshall Diana's footsteps can be heard patrolling the streets.$} {repop New Ofcol}
+#ACTION {~^${mud_color[repop]}Waves of wind wash through the tall grass like an ocean.$} {repop Northern Plains}
+#ACTION {~^${mud_color[repop]}The wind picks up along the lonely road, blowing debris and dust into the surrounding wilderness.$} {repop Northern Trade Route}
+#ACTION {~^${mud_color[repop]}A ship's bell clangs in the distance.$} {repop Ocean Keep}
+#ACTION {~^${mud_color[repop]}Time erodes the earth slightly further.$} {repop Ockwater Fens}
+#ACTION {~^${mud_color[repop]}Clouds of silt erupt about you as yet another storm churns the waters about...$} {repop Octopus Garden}
+#ACTION {~^${mud_color[repop]}The hallowed echoes of magicks lost echo somewhere in the darkness. Ofcol}
+#ACTION {~^${mud_color[repop]}Shadowed figures rise from their watery graves...$} {repop Old Marsh}
+#ACTION {~^${mud_color[repop]}You hear some squeaking sounds...$} {repop Old Thalos}
+#ACTION {~^${mud_color[repop]}Thunder echoes from the skies as the Gods continue to battle against this existence...$} {repop Olympus}
+#ACTION {~^${mud_color[repop]}The temperature plummets as a storm moves in...$} {repop Otherland}
+#ACTION {~^${mud_color[repop]}A pixie pops into view then flutters away, giggling...$} {repop Pixie Forest}
+#ACTION {~^${mud_color[repop]}You feel a chill in your bones as time passes...$} {repop Raven Tor}
+#ACTION {~^${mud_color[repop]}A quiet murmur trails through the cavern ...$} {repop Realm of Worship}
+#ACTION {~^${mud_color[repop]}As if expecting Redferne, everything returns to the way it was before he left.$} {repop Redferne's Residence}
+#ACTION {~^${mud_color[repop]}All grows silent as another falls from grace...$} {repop Revelation City}
+#ACTION {~^${mud_color[repop]}Dark sands twist and swirl like a gypsy dancer through hellfire...$} {repop Scourge of Time}
+#ACTION {~^${mud_color[repop]}Whispers of loves and battles lost can be heard over the ocean breezes...$} {repop Sea of Sorrows}
+#ACTION {~^${mud_color[repop]}The cry of a Skulk can be heard in the distance...$} {repop Sentinel}
+#ACTION {~^${mud_color[repop]}The air around you heats and shimmers, as if consumed by flame ...$} {repop Seth's Fortress} 
+#ACTION {~^${mud_color[repop]}The sound of rushing water can be heard echoing through the wasteland.$} {repop Sewer}
+#ACTION {~^${mud_color[repop]}A blanket of fog crawls out of the forest...$} {repop Shadow Grove}
+#ACTION {~^${mud_color[repop]}A wave of cold passes through you, inspiring dread despair...$} {repop Shadowport}
+#ACTION {~^${mud_color[repop]}A hiss of corrosion seeps from the darkness...$} {repop Shai'Ghool}
+#ACTION {~^${mud_color[repop]}The earth rumbles with the after-affects of another experiment gone awry...$} {repop Shattered Refuge}
+#ACTION {~^${mud_color[repop]}The streets bustle with the sounds of tiny feet on the move.$} {repop Shire}
+#ACTION {~^${mud_color[repop]}The rocks, hills and mountains continue to age with the world.$} {repop Southern Mountain Range}
+#ACTION {~^${mud_color[repop]}A strange, serene feeling ripples through your body, putting you at ease.$} {repop Temple of the Moon}
+#ACTION {~^${mud_color[repop]}Swirls of dust dance as the wind howls through the empty streets...$} {repop Thalos}
+#ACTION {~^${mud_color[repop]}A rhythmic chanting weaves its spell upon the desert wind...$} {repop Thul Ab'hara}
+#ACTION {~^${mud_color[repop]}Tortured screams echo throughout the tower, crying in supplication.$} {repop Tower of Despair}
+#ACTION {~^${mud_color[repop]}Cries, screams, and laughter can be heard from the Tower's inhabitants...$} {repop Tower of Enlightenment}
+#ACTION {~^${mud_color[repop]}Wails of distress can be heard off in the distance.$} {repop Tower of Zenothir}
+#ACTION {~^${mud_color[repop]}The town crier's call rises above the din of the city.$} {repop Town of Solace}
+#ACTION {~^${mud_color[repop]}An air of expectancy descends over the town, as the dead come home...$} {repop Transylvania}
+#ACTION {~^${mud_color[repop]}Branches rustle above as life continues ever onward...$} {repop Tree of Life}
+#ACTION {~^${mud_color[repop]}The branches rustle as creatures move in search of food.$} {repop Treetops and Canopy}
+#ACTION {~^${mud_color[repop]}A woman's nagging voice echoes from the manor house...$} {repop Tullfuhrzky Manor}
+#ACTION {~^${mud_color[repop]}A sense of overwhelming malevolence seeps from the very heart of the underworld...$} {repop Underworld}
+#ACTION {~^${mud_color[repop]}The grief of mourners is audible throughout the burial ground...$} {repop Unholy Grounds}
+#ACTION {~^${mud_color[repop]}A lone wail wells up in the distance only to fade into the shadows.$} {repop Valley of Mysts}
+#ACTION {~^${mud_color[repop]}Elvish laughter drifts on the wind as you wander through the valley...$} {repop Valley of the Elves}
+#ACTION {~^${mud_color[repop]}A cloud passes by the sun as the rice fields are gently caressed by the wind.$} {repop Village of Edo}
+#ACTION {~^${mud_color[repop]}You hear a small child scream for his mommy.$} {repop Warehouse}
+#ACTION {~^${mud_color[repop]}A sudden burst of wind blows hollowly over the barren wastelands.$} {repop Wastelands}
+#ACTION {~^${mud_color[repop]}The floorboards creak as the house begins to settle.$} {repop Wendle Mansion}
+#ACTION {~^${mud_color[repop]}High above the open road, the shrill cry of a falcon can be heard.$} {repop Western Trading Route}
+#ACTION {~^${mud_color[repop]}The antarctic winds rise to a plaintive whine then die out...$} {repop Wild Tundra}
+#ACTION {~^${mud_color[repop]}The caw of a flying beast echoes through the misty tower.$} {repop Wyvern's Tower}
+#ACTION {~^${mud_color[repop]}A swift blow to end defiance, a thousand voices silenced in fire...$} {repop Ziggurat}
+#ACTION {~^${mud_color[repop]}A foul wind blows through the city, bringing with it despair and regret.$} {repop Salburg}
+#ACTION {~^${mud_color[repop]}The walls of the mausoleum drip with blood as the dead rise once more.$} {repop Von Duesen}
+#ACTION {~^${mud_color[repop]}They say this mystery never shall cease: The priest promotes war, and the warrior peace.$} {repop The Valley of Crucifixion}
+#ACTION {~^${mud_color[repop]}In the deathly silence, dust settles and misery invades the unwary mind...$} {repop Daichaal} 
+#ACTION {~^${mud_color[repop]}The ancient temple shudders as the memories of a more innocent time fade into shadow.$} {repop Shattered Temple}
+#ACTION {~^${mud_color[repop]}Sloshing, bubbling noises emerge from deep within the earth.$} {repop Slime Pit}
+#ACTION {~^${mud_color[repop]}Distant rumblings resonate through the fissure from far below.$} {repop Mulciber's Forge}
+#ACTION {~^${mud_color[repop]}From the darkest shadow, a new prophecy is born...$} {repop Reign of Madness}
+#ACTION {~^${mud_color[repop]}A bloodcurdling scream is heard in the distance, as another meets their fate...$} {repop Badlands}
 
 #CLASS {RepopMessages} {CLOSE}
