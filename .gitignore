@@ -7,3 +7,7 @@ Logs/
 # structure, as the scripts can write to it without it existing.
 Utilities/worlds.dat
 
+# To keep from overwriting custom configuration files ignore the .conf files
+# and store .conf.example
+conf.d/*.conf
+
