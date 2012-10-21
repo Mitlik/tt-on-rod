@@ -6,13 +6,13 @@
 #NOP same directory you use to read in 'main'.
 #VARIABLE {script_dir} {tt-on-rod}
 
-#NOP Utilities contain system based dependencies
-#READ $script_dir/conf.d/system.conf
-
 #MATH {TRUE}  {2==2}
 #MATH {FALSE} {2==1}
 #MATH {ON}    {2==2}
 #MATH {OFF}   {2==1}
+
+#NOP Utilities contain system based dependencies
+#READ $script_dir/conf.d/system.conf
 
 #TICKER {Keep_Alive} {#CR} {600}
 
