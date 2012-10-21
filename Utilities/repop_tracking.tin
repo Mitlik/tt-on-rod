@@ -12,7 +12,7 @@
     };
     #ELSEIF {! &repop_data[%1][number]} {
         #NOP {An area's first logged repop};
-        #MATH {repop_data[%1][mean]} {@get_tdiff{$repop_data[%1][last_repop]};
+        #MATH {repop_data[%1][mean]} {@get_tdiff{$repop_data[%1][last_repop]}};
         #VARIABLE {repop_data[%1][min]} {$repop_data[%1][mean]};
         #VARIABLE {repop_data[%1][max]} {$repop_data[%1][mean]};
         #VARIABLE {repop_data[%1][number]} {1};
@@ -43,6 +43,6 @@
         #NOP {Try to find area};
         
     };
-    #SHOWME The last repop for $repop_report_area happened @parse_tdiff{@get_tdiff{$repop[$repop_report_area][last_repop]};
+    #SHOWME The last repop for $repop_report_area happened @parse_tdiff{@get_tdiff{$repop[$repop_report_area][last_repop]}};
 }
 nop};
