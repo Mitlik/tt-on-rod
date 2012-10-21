@@ -11,3 +11,8 @@
 #VARIABLE {clr_ask} {${tt_fg_viridian}}
 #VARIABLE {clr_tell} {${tt_bg_grey}${tt_fg_black}}
 
+#NOP Repop Tracking
+#NOP ==============
+#VARIABLE {repop_tracking} {$TRUE}
+#VARIABLE {mud_color[repop]} {$ansi_color_green}
+
