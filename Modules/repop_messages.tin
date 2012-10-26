@@ -121,5 +121,6 @@
 #ACTION {~^${mud_color[repop]}Distant rumblings resonate through the fissure from far below.$} {repop Mulciber's Forge}
 #ACTION {~^${mud_color[repop]}From the darkest shadow, a new prophecy is born...$} {repop Reign of Madness}
 #ACTION {~^${mud_color[repop]}A bloodcurdling scream is heard in the distance, as another meets their fate...$} {repop Badlands}
+#ACTION {~^${mud_color[repop]}A sharp, unnatural breeze chills you to the bone.$} {repop Winterlight Island}
 
 #CLASS {RepopMessages} {CLOSE}
