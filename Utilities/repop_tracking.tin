@@ -26,6 +26,7 @@
         #ELSEIF {$repop_duration < $repop_data[%0][min]} {#VARIABLE {repop_data[%0][min]} {$repop_duration};};
         #MATH {repop_data[%0][number]} {$repop_data[%0][number] + 1};
     };
+    #VARIABLE {last_repop_area} {%0};
     #VARIABLE {repop_data[%0][last_repop]} {$repop_time};
     #CLASS {repop} {WRITE} {$script_dir/Utilities/repop.dat};
 }
@@ -44,8 +45,9 @@
         #NOP {Try to find area};
         
     }; nop};
-    #VARIABLE {repop_report_area} {$last_repop_area};
-    #SHOWME The last repop for $repop_report_area happened @parse_tdiff{@get_tdiff{$repop_data[$repop_report_area][last_repop]}} ago.;
+    #VARIABLE {sincerepop_area} {$last_repop_area};
+    #SHOWME The last repop for $sincerepop_area happened @parse_tdiff{@get_tdiff{$repop_data[$sincerepop_area][last_repop]}} ago.;
+    #UNVARIABLE {sincerepop_area};
 }
 
 #ALIAS {lastrepop} {
@@ -62,7 +64,9 @@
         #NOP {Try to find area};
         
     }; nop};
-    #VARIABLE {repop_report_area} {$last_repop_area};
-    #SHOWME The last repop for $repop_report_area happened at @epoch2time{$repop_data[$repop_report_area][last_repop];};
+    #VARIABLE {lastrepop_area} {$last_repop_area};
+    #SHOWME The last repop for $lastrepop_area happened at @epoch2time{$repop_data[$lastrepop_area][last_repop];};
+    #UNVARIABLE {lastrepop_area};
 }
 #CLASS {utilities} {CLOSE}
+
