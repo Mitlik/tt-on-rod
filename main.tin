@@ -19,10 +19,12 @@
 #NOP Read in Utilities
 #NOP =================
 #READ $script_dir/Utilities/time.tin
+#READ $script_dir/Utilities/string.tin
 #READ $script_dir/Utilities/ansi_colors.tin
 #READ $script_dir/Utilities/tt_colors.tin
 #READ $script_dir/Utilities/worlds.tin
 #READ $script_dir/Utilities/repop_tracking.tin
+#READ $script_dir/Utilities/msdp.tin
 
 #NOP Read in Configuration
 #NOP =====================

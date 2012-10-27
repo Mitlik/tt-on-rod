@@ -1,0 +1,116 @@
+#CLASS {msdp} {OPEN}
+
+#FORMAT {IAC}  {%a} {255};
+#FORMAT {DONT} {%a} {254};
+#FORMAT {DO}   {%a} {253};
+#FORMAT {WONT} {%a} {252};
+#FORMAT {WILL} {%a} {251};
+#FORMAT {SB} {%a} {250};
+#FORMAT {SE} {%a} {240};
+
+#FORMAT {MSDP} {%a} {69};
+
+#FORMAT {VAR} {%a} {01};
+#FORMAT {VAL} {%a} {02};
+
+#ALIAS {msdp} {
+    #FORMAT {msdp_parameter} {%l} {%0};
+    #IF {"$msdp_parameter" == "toggle"} {
+        #MATH {masp_status} {!$msdp_status};
+        #IF {$msdp_status} {
+            #SEND {${IAC}${DO}${MSDP}};
+            msdp_report;
+        };
+        #ELSE {
+            #SEND {${IAC}${DONT}${MSDP}};
+		};
+    };
+    #ELSEIF {"$msdp_parameter" == "on"} {
+        #VARIABLE {msdp_status} {$ON};
+        #SEND {${IAC}${DO}${MSDP}};
+        msdp_report;
+	};
+    #ELSEIF {"$msdp_parameter" == "off"} {
+        #VARIABLE {msdp_status} {$OFF};
+        #SEND {${IAC}${DONT}${MSDP}};
+    };
+    #ELSEIF {"$msdp_parameter" == "status"} {
+        #IF {$msdp_status} {
+            #SHOWME {MSDP Status: ON};
+        };
+        #ELSE {
+            #SHOWME {MSDP Status: OFF};
+        };
+    };
+    #ELSEIF {"$msdp_parameter" == "restart"} {
+    };
+    #ELSE {
+        #SHOWME {Usage: msdp <command>};
+        #SHOWME {  COMMANDS};
+        #SHOWME {    off       Turn off msdp};
+        #SHOWME {    on        Turn on msdp};
+        #SHOWME {    restart   Restart msdp};
+        #SHOWME {    status    Show the msdp status};
+        #SHOWME {    toggle    Toggle msdp};
+        #SHOWME {    help      Show this message};
+	};
+}
+
+#VARIABLE {msdp_reportable_variables} {{CHARACTER_NAME};{CLASS};{LEVEL};{HEALTH};
+   {HEALTH_MAX};{MANA};{MANA_MAX};{BLOOD};{MOVEMENT};{MOVEMENT_MAX};{MONEY};
+   {HITROLL};{DAMROLL};{AC};{STR};{INT};{WIS};{DEX};{CON};{CHA};{LCK};
+   {STR_PERM};{INT_PERM};{WIS_PERM};{DEX_PERM};{CON_PERM};{CHA_PERM};{LCK_PERM};
+   {OPPONENT_NAME};{OPPONENT_LEVEL};{OPPONENT_HEALTH};{AREA_NAME};{WORLD_TIME};
+   {ROOM_NAME};{AFFECTS};{WIMPY};{ALIGNMENT}};
+
+#ALIAS {msdp_report} {
+    #VARIABLE {result} {$IAC$SB$MSDP${VAR}REPORT};
+    #FOREACH {$msdp_reportable_variables[]} {tmp} {
+        #VARIABLE {result} {$result${VAL}$tmp};
+    };
+    #SEND {$result$IAC$SE\}
+}
+
+#ALIAS {msdp_list} {
+    #SEND {$IAC$SB$MSDP${VAR}LIST${VAL}%0$IAC$SE\};
+}
+
+#ALIAS {msdp_send} {
+    #SEND {$IAC$SB$MSDP${VAR}SEND${VAL}%0$IAC$SE\};
+}
+
+#NOP ******Turn telnet debug off once everything works as it's spammy.******;
+#NOP #CONFIG {debug telnet} {on};
+
+#EVENT {IAC WILL MSDP} {
+        #SEND {$IAC$DO$MSDP\};
+}
+
+#EVENT {IAC SB MSDP} {
+   #NOP Save all variables with an MSDP_ prefix.;
+   #IF {"%0" == "AFFECTS"}
+   {
+      #NOP {#script {echo %1 | ./Cmds/Scripts/list2array.sh}; };
+      #VARIABLE {tmp} {%1};
+      #REPLACE {tmp} {\a\a} {;};
+      #REPLACE {tmp} {\a} {;};
+      #REPLACE {tmp} {,} {;};
+      #LIST {MSDP_%0} {CREATE};
+      #UNVARIABLE {msdp_info[%0]};
+      #FORALL {$tmp} { #LIST {MSDP_%0} {ADD} {&0}; };
+      #FORALL {$tmp} { #VARIABLE {msdp_info[%0]} {&0}; };
+   }
+   {
+      #VARIABLE {msdp_info[%0]} {%1};
+   };
+}
+
+#NOP This event is generated at the end of an MSDP sub negotiation.;
+
+#EVENT {IAC SB MSDP IAC SE} {
+    #NOP;
+    #NOP show_prompt;
+}
+
+#CLASS {msdp} {CLOSE}
+
