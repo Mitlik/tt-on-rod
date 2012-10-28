@@ -33,38 +33,36 @@
 
 #ALIAS {sincerepop} {
     #CLASS {repop} {READ} {$script_dir/Utilities/repop.dat};
-    #NOP {
-    #IF {"%0" == "" && $MSDP} {
+    #IF {"%0" == "" && $MSDP_ON} {
         #NOP {Assume current area};
-        
+        #VARIABLE {sincerepop_area} {$msdp_info[AREA_NAME]};
     };
     #ELSEIF {"%0" == ""} {
         #NOP {Assume the last repop seen};
+        #VARIABLE {sincerepop_area} {$last_repop_area};
     }
     #ELSE {
         #NOP {Try to find area};
-        
-    }; nop};
-    #VARIABLE {sincerepop_area} {$last_repop_area};
+	#VARIABLE {sincerepop_area} {$last_repop_area};
+    };
     #SHOWME The last repop for $sincerepop_area happened @parse_tdiff{@get_tdiff{$repop_data[$sincerepop_area][last_repop]}} ago.;
     #UNVARIABLE {sincerepop_area};
 }
 
 #ALIAS {lastrepop} {
     #CLASS {repop} {READ} {$script_dir/Utilities/repop.dat};
-    #NOP {
-    #IF {"%0" == "" && $MSDP} {
+    #IF {"%0" == "" && $MSDP_ON} {
         #NOP {Assume current area};
-        
+        #VARIABLE {lastrepop_area} {$msdp_info[AREA_NAME]};
     };
     #ELSEIF {"%0" == ""} {
         #NOP {Assume the last repop seen};
+        #VARIABLE {lastrepop_area} {$last_repop_area};
     }
     #ELSE {
         #NOP {Try to find area};
-        
-    }; nop};
-    #VARIABLE {lastrepop_area} {$last_repop_area};
+	#VARIABLE {lastrepop_area} {$last_repop_area};
+    };
     #SHOWME The last repop for $lastrepop_area happened at @epoch2time{$repop_data[$lastrepop_area][last_repop];};
     #UNVARIABLE {lastrepop_area};
 }
