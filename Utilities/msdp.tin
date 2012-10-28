@@ -16,8 +16,8 @@
 #ALIAS {msdp} {
     #FORMAT {msdp_parameter} {%l} {%0};
     #IF {"$msdp_parameter" == "toggle"} {
-        #MATH {masp_status} {!$msdp_status};
-        #IF {$msdp_status} {
+        #MATH {MSDP_ON} {!$MSDP_ON};
+        #IF {$MSDP_ON} {
             #SEND {${IAC}${DO}${MSDP}};
             msdp_report;
         };
@@ -26,16 +26,16 @@
 		};
     };
     #ELSEIF {"$msdp_parameter" == "on"} {
-        #VARIABLE {msdp_status} {$ON};
+        #VARIABLE {MSDP_ON} {$ON};
         #SEND {${IAC}${DO}${MSDP}};
         msdp_report;
 	};
     #ELSEIF {"$msdp_parameter" == "off"} {
-        #VARIABLE {msdp_status} {$OFF};
+        #VARIABLE {MSDP_ON} {$OFF};
         #SEND {${IAC}${DONT}${MSDP}};
     };
     #ELSEIF {"$msdp_parameter" == "status"} {
-        #IF {$msdp_status} {
+        #IF {$MSDP_ON} {
             #SHOWME {MSDP Status: ON};
         };
         #ELSE {
