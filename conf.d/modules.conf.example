@@ -4,7 +4,7 @@
 #NOP Channel Highlight
 #NOP =================
 #NOP This changes the colors of channels since so many use the same color
-#VARIABLE {channel_highlight} {TRUE}
+#VARIABLE {channel_highlight} {$ON}
 #VARIABLE {clr_ot} {${tt_fg_indigo}}
 #VARIABLE {clr_qst} {${tt_fg_azure}}
 #VARIABLE {clr_chat} {${tt_fg_brown}}
@@ -13,6 +13,6 @@
 
 #NOP Repop Tracking
 #NOP ==============
-#VARIABLE {repop_tracking} {$TRUE}
+#VARIABLE {repop_tracking} {$ON}
 #VARIABLE {mud_color[repop]} {$ansi_color_green}
 
