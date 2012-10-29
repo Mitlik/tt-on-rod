@@ -10,7 +10,7 @@
 
 #CLASS {worlds} {OPEN}
 #ALIAS {recon} {
-    #EVENT {SESSION DEACTIVATED} {#gts {#DELAY {recon_%%0} {cn %%0} {.200}}};
+    #EVENT {SESSION DISCONNECTED} {#gts {#DELAY {recon_%%0} {cn %%0} {.200}}};
     #ZAP;
 }
 
