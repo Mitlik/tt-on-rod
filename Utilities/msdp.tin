@@ -87,20 +87,34 @@
 }
 
 #EVENT {IAC SB MSDP} {
-   #NOP Save all variables with an MSDP_ prefix.;
+   #NOP {Save all variables with an MSDP_ prefix.};
    #IF {"%0" == "AFFECTS"}
    {
       #NOP {#script {echo %1 | ./Cmds/Scripts/list2array.sh}; };
+      #VARIABLE {msdp_test} {%1};
       #VARIABLE {tmp} {%1};
       #REPLACE {tmp} {\a\a} {;};
       #REPLACE {tmp} {\a} {;};
-      #REPLACE {tmp} {,} {;};
-      #LIST {MSDP_%0} {CREATE};
+      #NOP {#REPLACE {tmp} {,} {;}; };
+      #NOP {#LIST {MSDP_%0} {CREATE};};
       #UNVARIABLE {msdp_info[%0]};
-      #FORALL {$tmp} { #LIST {MSDP_%0} {ADD} {&0}; };
-      #FORALL {$tmp} { #VARIABLE {msdp_info[%0]} {&0}; };
-   }
-   {
+      #NOP {#FORALL {$tmp} { #LIST {MSDP_%0} {ADD} {&0}; };};
+      #FORALL {$tmp} {
+          #VARIABLE {msdp_affect} {&0};
+          #REPLACE {msdp_affect} {,} {;};
+          #VARIABLE {msdp_level} {1};
+          #FOREACH {$msdp_affect} {msdp_item} {
+              #IF {$msdp_level == 1} {
+                  #VARIABLE {msdp_spell} {$msdp_item};
+                  #VARIABLE {msdp_level} {2};
+              };
+              #ELSE {
+	          #VARIABLE {msdp_info[%0][$msdp_spell]} {$msdp_item};
+	      };
+          };
+      };
+   };
+   #ELSE {
       #VARIABLE {msdp_info[%0]} {%1};
    };
 }
@@ -108,8 +122,8 @@
 #NOP This event is generated at the end of an MSDP sub negotiation.;
 
 #EVENT {IAC SB MSDP IAC SE} {
-    #NOP;
-    #NOP show_prompt;
+    #NOP {};
+    #NOP {show_prompt};
 }
 
 #CLASS {msdp} {CLOSE}
