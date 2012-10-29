@@ -9,6 +9,11 @@
 #CLASS {worlddata} {READ} {$script_dir/Utilities/worlds.dat};
 
 #CLASS {worlds} {OPEN}
+#ALIAS {recon} {
+    #EVENT {SESSION DEACTIVATED} {#gts {#DELAY {recon_%%0} {cn %%0} {.200}}};
+    #ZAP;
+}
+
 #ALIAS {addworld} {
     #CLASS {worlddata} {READ} {$script_dir/Utilities/worlds.dat};
     #FORMAT {utility_worlds_session} {%n} {%1};
