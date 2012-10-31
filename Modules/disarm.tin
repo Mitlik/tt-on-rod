@@ -1,0 +1,33 @@
+#CLASS {disarm} OPEN
+
+#ACTION {~^\e[0;1;31m%* DISARMS your %*!$}
+{
+	get $weapons[%2];
+	wield $weapons[%2]
+}
+{4}
+
+#ALIAS {addweap}
+{
+	#class {disarm} {READ} {$script_dir/Modules/disarm.tin};
+	#if {"%2" == "" || "%1" == ""}
+	{
+		#showme {Usage: addweap <short desc> <keys> [force]}
+	};
+	#elseif {&weapons[%1] && "%3" == ""}
+	{
+		#showme {addweap: %1 already exists};
+		#showme {\tyour keys: %2};
+		#showme {\tweap keys: $weapons[%1]}
+	};
+	#else
+	{
+		#variable {weapons[%1]} {%2};
+		#class {disarm} {WRITE} {$script_dir/Modules/disarm.tin}
+	}
+}
+{5}
+
+#VARIABLE         {weapons}  {{Abyssal Shadow}{abyssal-shadow-sword}{Black Dragonskull Ax}{olsen-black-dragonskull-ax}{Blade of Folterung}{blade-folterung-carving-knife}{Chaos}{warren-chaos}{Darkfire blaster}{sand-device-darkfire-blaster}{Darkfire talon}{sand-device-darkfire-talon}{Darkfire thrasher}{sand-device-darkfire-thrasher}{Denaeth Rusen}{warren-denaeth-rusen-sea}{Dragon Claw of Legend}{dragon-claw-legend}{Excalibur}{ancient-excalibur}{Genesis}{genesis}{Justice}{blade-justice-sword-platinum}{Kurald Gelain}{warren-kurald-gelain-darkness}{Lifebane}{lifebane}{Maul of Stone}{maul-golem}{Nasr, Claymore of Sovereignty}{nasr-claymore-sovereignty}{Oblivion}{oblivion}{Saliwillow}{saliwillow-branch}{Shaft of Light}{shaft-light-spear}{Snake's eye}{eye-blade-danbala}{Soulslayer}{sword-runesword-soulslayer}{Staff of the Magi}{staff-magi-thoth}{Sword of Legend}{sword-legend}{Tellann}{warren-tellann-fire}{amazon spear}{spear}{an amazon spear}{spear}{an oar}{oar-paddle}{ancient sword of the kami}{ancient-sword-kami}{black hilted sword "Shieldbreaker"}{sword-shieldbreaker}{corkscrew}{corkscrew}{darkness}{darkness-void}{dragon fang}{fang-bahamut}{dragonsbane}{dragonsbane-blade}{inscribed dagger}{inscribed-dagger}{medusa tentacle}{medusa-tentacle}{oar}{oar-paddle}{pearl-hilted dagger}{short-sharp-dagger-pearl}{spear of Athena}{spear-athena}{staff of chiseled obsidian}{staff-obsidian}}
+
+#CLASS {disarm} CLOSE

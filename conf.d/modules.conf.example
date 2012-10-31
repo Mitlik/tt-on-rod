@@ -16,3 +16,8 @@
 #VARIABLE {repop_tracking} {$ON}
 #VARIABLE {mud_color[repop]} {$ansi_color_green}
 
+#NOP Disarm Scripts
+#NOP ==============
+#VARIABLE {DISARM_ON} {$ON}
+#VARIABLE {mud_color[disarm]} {$ansi_color_light_red}
+
