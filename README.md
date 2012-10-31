@@ -59,10 +59,10 @@ neat features
 <pre>
 [X] Simplified connect with stored character data
 [ ] Simple speed walk with storage: check vs built-in speedwalk
-[ ] Basic MSDP
+[X] Basic MSDP
 [ ] Basic battle scripts
-    [ ] Disarm
-    [ ] Cure blind if true sight < gouge/blind
+    [X] Disarm
+    [ ] Cure blind if true sight runs before gouge/blind
 </pre>
 
 Version 2
