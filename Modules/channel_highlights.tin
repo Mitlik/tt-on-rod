@@ -1,10 +1,8 @@
 #CLASS {channels} {OPEN}
 
-#VARIABLE {mud_chan_color} {$ansi_color_light_blue}
-
-#SUBSTITUTE {~^${mud_chan_color}%w ordertalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ot}%1 ordertalk%2 '%3'} {6}
-#SUBSTITUTE {~^${mud_chan_color}%* quest%? '%*'$} {${tt_fg_white}@gettime{} ${clr_qst}%1 quest%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w ordertalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ot}%1 ordertalk%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%* quest%? '%*'$} {${tt_fg_white}@gettime{} ${clr_qst}%1 quest%2 '%3'} {6}
 #SUBSTITUTE {~^${ansi_color_white}%w tell%? %w '%*'$} {${tt_fg_white}@gettime{} ${clr_tell}%1 tell%2 %3 '%4'} {6}
-#SUBSTITUTE {~^${mud_chan_color}%w {ask|answer}%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ask}%1 %2%3 '%4'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w {ask|answer}%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ask}%1 %2%3 '%4'} {6}
 
 #CLASS {channels} {CLOSE}
