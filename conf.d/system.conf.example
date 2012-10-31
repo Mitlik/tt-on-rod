@@ -1,4 +1,9 @@
+#CLASS {config} {OPEN}
+
 #NOP Keep system specific settings here
 
 #VARIABLE {LINUX} {$TRUE}
 #NOP #VARIABLE {WINDOWS} {$FALSE}
+
+#CLASS {config} {CLOSE}
+
