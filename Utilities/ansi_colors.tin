@@ -10,7 +10,7 @@
 #VARIABLE {ansi_color_green} {\e[0;32m}
 #VARIABLE {ansi_color_light_green} {\e[0;1;32m}
 #VARIABLE {ansi_color_dark_blue} {\e[0;34m}
-#VARIABLE {ansi_color_blue} {\e[0;1;34m}
+#VARIABLE {ansi_color_blue} {\e[1;34m}
 #VARIABLE {ansi_color_cyan} {\e[0;36m}
 #VARIABLE {ansi_color_light_blue} {\e[0;1;36m}
 #VARIABLE {ansi_color_purple} {\e[0;35m}
