@@ -7,5 +7,6 @@
         #VARIABLE {AFK} {$FALSE};
     };
     #CLASS {afk} {CLOSE};
+    afk;
 }
 
