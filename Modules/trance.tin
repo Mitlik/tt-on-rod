@@ -1,0 +1,46 @@
+#CLASS {trance} {OPEN}
+
+#NOP This will always be off at read in because of no link-dead trance.;
+#VARIABLE {TRANCE_ON} {$OFF}
+
+#ALIAS {gotrance} {
+    #VARIABLE {TRANCE_ON} {$ON};
+    trance;
+}
+#ALIAS {stoptrance} { #VARIABLE {TRANCE_ON} {$OFF}; }
+
+#ACTION {~^${mud_color[trance]}You enter a peaceful trance, collecting mana from the cosmos.$} {
+    #NOP Stop manual trance from creating infinite loop;
+    #IF {$TRANCE_ON} {#UNDELAY {Enter_Trance};};
+}
+#ACTION {~^${mud_color[trance]}You come out of your trance.$} {
+    #NOP Stop manual trance from creating infinite loop;
+    #IF {$TRANCE_ON} {#DELAY {Enter_Trance} {trance} {.050};};
+}
+#ACTION {^You complete your trance.$} {
+    #NOP Note, there is no color on this line because it is piggybacked off of;
+    #NOP the collect message.;
+    #NOP In your peaceful trance, you collect mana from the cosmos.;
+
+    #VARIABLE {TRANCE_ON} {$OFF};
+}
+
+#ACTION {^You enter into a meditative state, hoping to collect mana from the cosmos.$} {
+    #NOP No color code on this, it piggybacks off the stop meditate line;
+    #NOP Stop manual trance from creating infinite loop;
+    #IF {$TRANCE_ON} {#UNDELAY {Enter_Trance};};
+}
+#ACTION {~^${mud_color[trance]}You stop meditating.$} {
+    #NOP Stop manual trance from creating infinite loop;
+    #IF {$TRANCE_ON} {#DELAY {Enter_Trance} {meditate} {.050};};
+}
+#ACTION {^You complete your meditations.$} {
+    #NOP Note, there is no color on this line because it is piggybacked off of;
+    #NOP the collect message.;
+    #NOP You meditate peacefully, collecting mana from the cosmos.;
+
+    #VARIABLE {TRANCE_ON} {$OFF};
+}
+
+#CLASS {trance} {CLOSE}
+

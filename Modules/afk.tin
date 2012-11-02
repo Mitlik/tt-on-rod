@@ -1,0 +1,11 @@
+#ALIAS {goafk} {
+    #VARIABLE {AFK} {$TRUE};
+    #CLASS {afk} {OPEN};
+    #ACTION {^You are no longer afk.$} {afk};
+    #ALIAS {backafk} {
+    	#CLASS {afk} {KILL}
+        #VARIABLE {AFK} {$FALSE};
+    };
+    #CLASS {afk} {CLOSE};
+}
+

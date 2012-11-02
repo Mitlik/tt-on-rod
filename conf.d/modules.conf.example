@@ -24,5 +24,7 @@
 #VARIABLE {DISARM_ON} {$ON}
 #VARIABLE {mud_color[disarm]} {$ansi_color_light_red}
 
+#VARIABLE {MISC_ON} {$ON}
+
 #CLASS {config} {CLOSE}
 
