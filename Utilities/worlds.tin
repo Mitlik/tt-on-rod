@@ -56,6 +56,7 @@
 
 #ALIAS {cn} {
     #FORMAT {utility_worlds_connect} {%n} {%1};
+    #gts {#FORMAT {utility_worlds_connect} {%n} {%1};};
     #IF {"%1" == ""} {
         #ECHO {%h} {{ WORLD LIST }};
         #FOREACH {$worldlist[]} {world} {
@@ -63,29 +64,33 @@
         }
     };
     #ELSEIF {&{worldlist[$utility_worlds_connect]}} {
-        #VAR {world} {$worldlist[$utility_worlds_connect]};
+        #SESSION {$utility_worlds_connect} {$worldlist[$utility_worlds_connect][host]} {$worldlist[$utility_worlds_connect][port]};
+        #gts {
+	    #READ $script_dir/Utilities/worlds.dat;
+            #VAR {world} {$worldlist[$utility_worlds_connect]};
 
-        #NOP This section was an attempt to use events to control the login process
-        #NOP {#EVENT {SESSION CONNECTED} {
-	    #IF {&{worldlist[%0][name]}} {#%0 $worldlist[%0][name]};
-	    #IF {&{worldlist[%0][pw]}} {#%0 $worldlist[%0][pw]}; 
-	} nop};
+            #NOP This section was an attempt to use events to control the login process
+            #NOP {#EVENT {SESSION CONNECTED} {
+	        #IF {&{worldlist[%0][name]}} {#%0 $worldlist[%0][name]};
+	        #IF {&{worldlist[%0][pw]}} {#%0 $worldlist[%0][pw]}; 
+	    } nop};
 
-        #SESSION {$utility_worlds_connect} {$world[host]} {$world[port]};
-        #IF {&{worldlist[$utility_worlds_connect][pw]}} {
-            #$utility_worlds_connect $worldlist[$utility_worlds_connect][name];
-            #$utility_worlds_connect $worldlist[$utility_worlds_connect][pw];
-            #$utility_worlds_connect {
-                #READ $script_dir/Characters/$world[$utility_worlds_connect][name];
-                #DELAY {1} {#CR;#DELAY {1} {#CR}}
+            #IF {&{worldlist[$utility_worlds_connect][pw]}} {
+                #${utility_worlds_connect} {
+                    $worldlist[$utility_worlds_connect][name];
+                    $worldlist[$utility_worlds_connect][pw];
+                    #READ $script_dir/Characters/$world[$utility_worlds_connect][name];
+                };
             };
-        };
+	};
     };
     #ELSE {
         #SHOWME {Couldn't find world $utility_worlds_connect.};
     };
     #UNVARIABLE {utility_worlds_connect};
 }
+
+#ACTION {~^Last connected from: %d.%d.%d.%d$} {#CR;#Delay {0.200} {#CR};}
 
 #CLASS {worlds} {CLOSE}
 
