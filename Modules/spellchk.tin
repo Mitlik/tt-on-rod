@@ -1,0 +1,93 @@
+#CLASS {spellchk} {OPEN}
+
+#ACTION {~^${mud_color[generic channel]}%w says 'spellchk %*'$} {
+    #IF {! $MSDP_ON} {
+	#SEND {${IAC}${DO}${MSDP}};
+	msdp_report;
+    };
+    #FORMAT {spell} {%l} {%2};
+    #VARIABLE {affs} {$msdp_info[AFFECTS]};
+    #IF {"$spell" == "shields"} {
+        #NOP sanc, shields, elemental supremacy, deathsphere, acidshield;
+        #IF {&{affs[sanctuary]}} {
+            #VARIABLE {spellchk_report} {$affs[sanctuary] sanc};
+        };
+        #ELSEIF {&{affs[holy sanctity]}} {
+            #VARIABLE {spellchk_report} {$affs[holy sanctity] sanc};
+		};
+        #ELSEIF {&{affs[greater sanctuary]}} {
+            #VARIABLE {spellchk_report} {$affs[greater sanctuary] gtrsanc};
+		};
+        #ELSEIF {&{affs[sacral divinity]}} {
+            #VARIABLE {spellchk_report} {$affs[sacral divinity] sanc};
+		};
+        #ELSEIF {&{affs[prophetic aura]}} {
+            #VARIABLE {spellchk_report} {$affs[prophetic aura] augsanc};
+		};
+        #ELSE { #VARIABLE {spellchk_report} {no sanc}; };
+        #IF {! &{affs[elemental supremacy]} && ! &{affs[fireshield]} && ! &{affs[iceshield]} && ! &{affs[shockshield]}} {
+            #VARIABLE {spellchk_report} {${spellchk_report}, no shields};
+        };
+        #ELSE {
+            #IF {&{affs[fireshield]}} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[fireshield] fire}; };
+            #IF {&{affs[iceshield]}} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[iceshield] ice}; };
+            #IF {&{affs[shockshield]}} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[shockshield] shock}; };
+            #IF {&{affs[elemental supremacy]}} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[elemental supremacy] esup}; };
+		};
+        #IF {&{affs[acidmist]}} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[acidmist] acid}; };
+        #IF {&{affs[deathsphere]}} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[deathsphere] dsphere}; };
+        emote has ${spellchk_report}.;
+        #UNVARIABLE {spellchk_report};
+    };
+    #ELSEIF {"$spell" == "shorts"} {
+        #NOP eldritch sphere, shadowform, fly, protection, acidward;
+        #IF {&affs[eldritch sphere]} { #VARIABLE {spellchk_report} {$affs[eldritch sphere] eld}; };
+        #ELSE { #VARIABLE {spellchk_report} {no eld}; };
+        #IF {&affs[shadowform]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[shadowform] shadowf}; };
+        #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no shadowf}; };
+        #IF {&affs[acidward]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[acidward] acid}; };
+        #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no acid}; };
+        #IF {&affs[fly]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[fly] fly}; };
+        #ELSEIF {$msdp_info[RACE]} { #VARIABLE {spellchk_report} {${spellchk_report}, inf fly}; };
+        #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no fly}; };
+        #IF {&affs[protection]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[protection] prot}; };
+        #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no prot}; };
+        emote has ${spellchk_report}.;
+        #UNVARIABLE {spellchk_report};
+	};
+    #ELSEIF {"$spell" == "safe"} {
+        #NOP hide, fly, invis, aqua, scry;
+        #VARIABLE {affs} {$msdp_info[AFFECTS]};
+        #IF {&affs[fly]} { #VARIABLE {spellchk_report} {$affs[fly] fly}; };
+        #ELSEIF {$msdp_info[RACE]} { #VARIABLE {spellchk_report} {inf fly}; };
+        #ELSE { #VARIABLE {spellchk_report} {no fly}; };
+        #IF {&affs[invis]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[invis] invis}; };
+        #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no invis}; };
+        #IF {&affs[aqua breath]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[aqua breath] aqua}; };
+        #ELSEIF {&affs[breath of heaven]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[breath of heaven] aqua}; };
+        #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no aqua}; };
+        emote has ${spellchk_report}.;
+        #UNVARIABLE {spellchk_report};
+	};
+    #ELSEIF {"$spell" == "sanc" || "$spell" == "sanctuary"} {
+        #IF {&{affs[sanctuary]}} { emote has $affs[sanctuary] sanc.; };
+        #ELSEIF {&{affs[holy sanctity]}} { emote has $affs[holy sanctity] sanc.; };
+        #ELSEIF {&{affs[greater sanctuary]}} { emote has $affs[greater sanctuary] gtrsanc.; };
+        #ELSEIF {&{affs[sacral divinity]}} { emote has $affs[sacral divinity] sanc.; };
+        #ELSEIF {&{affs[prophetic aura]}} { emote has $affs[prophetic aura] aug sanc.; };
+        #ELSE { emote couldn't find sanc.; };
+	};
+    #ELSEIF {"$spell" == "aqua" } {
+        #IF {&affs[aqua breath]} { emote has $affs[aqua breath] aqua.; };
+        #ELSEIF {&affs[breath of heaven]} { emote has $affs[breath of heaven] aqua.; };
+        #ELSE { emote couldn't find aqua.; };
+	};
+    #ELSEIF {&{affs[$spell]}} {
+	    emote has $affs[$spell] $spell.;
+	};
+    #ELSE {emote couldn't find ${spell}.};
+    #UNVARIABLE {affs} {$msdp_info[AFFECTS]};
+} {3}
+
+#CLASS {spellchk} {CLOSE}
+

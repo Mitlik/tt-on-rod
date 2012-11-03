@@ -24,6 +24,11 @@
 #VARIABLE {DISARM_ON} {$ON}
 #VARIABLE {mud_color[disarm]} {$ansi_color_light_red}
 
+#NOP Spell Check
+#NOP ===========
+#VARIABLE {SPELLCHK_ON} {$ON}
+#NOP #VARIABLE {mud_color[generic channel]} {$ansi_color_light_blue}
+
 #VARIABLE {MISC_ON} {$ON}
 
 #CLASS {config} {CLOSE}

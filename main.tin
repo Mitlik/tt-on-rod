@@ -35,5 +35,6 @@
 #IF {$channel_highlight} {#READ $script_dir/Modules/channel_highlights.tin}
 #IF {$repop_tracking} {#READ $script_dir/Modules/repop_messages.tin}
 #IF {$DISARM_ON} {#READ $script_dir/Modules/disarm.tin}
+#IF {$SPELLCHK_ON} {#READ $script_dir/Modules/spellchk.tin}
 #IF {$MISC_ON} {#READ $script_dir/Modules/misc.tin}
 
