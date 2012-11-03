@@ -61,7 +61,7 @@
    {HITROLL};{DAMROLL};{AC};{STR};{INT};{WIS};{DEX};{CON};{CHA};{LCK};
    {STR_PERM};{INT_PERM};{WIS_PERM};{DEX_PERM};{CON_PERM};{CHA_PERM};{LCK_PERM};
    {OPPONENT_NAME};{OPPONENT_LEVEL};{OPPONENT_HEALTH};{AREA_NAME};{WORLD_TIME};
-   {ROOM_NAME};{AFFECTS};{WIMPY};{ALIGNMENT}};
+   {ROOM_NAME};{RACE};{AFFECTS};{WIMPY};{ALIGNMENT}};
 
 #ALIAS {msdp_report} {
     #VARIABLE {result} {$IAC$SB$MSDP${VAR}REPORT};
@@ -105,7 +105,7 @@
           #VARIABLE {msdp_level} {1};
           #FOREACH {$msdp_affect} {msdp_item} {
               #IF {$msdp_level == 1} {
-                  #VARIABLE {msdp_spell} {$msdp_item};
+                  #FORMAT {msdp_spell} {%l} {$msdp_item};
                   #VARIABLE {msdp_level} {2};
               };
               #ELSE {
