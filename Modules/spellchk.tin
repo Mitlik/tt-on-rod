@@ -1,7 +1,7 @@
 #CLASS {spellchk} {OPEN}
 
 #ACTION {~^${mud_color[generic channel]}%w says 'spellchk %*'$} {
-    #IF {! $MSDP_ON} {
+    #IF {!&{MSDP_ON} || !$MSDP_ON} {
 	#SEND {${IAC}${DO}${MSDP}};
 	msdp_report;
     };
