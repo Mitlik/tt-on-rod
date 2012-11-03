@@ -37,4 +37,5 @@
 #IF {$DISARM_ON} {#READ $script_dir/Modules/disarm.tin}
 #IF {$SPELLCHK_ON} {#READ $script_dir/Modules/spellchk.tin}
 #IF {$MISC_ON} {#READ $script_dir/Modules/misc.tin}
+#IF {$EQDMG_ON} {#READ $script_dir/Modules/equipment_tracking.tin}
 

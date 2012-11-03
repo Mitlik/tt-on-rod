@@ -1,0 +1,115 @@
+#CLASS {eqhits} {OPEN}
+#VARIABLE {eqhits} {0}
+#VARIABLE {equipment} {}
+#CLASS {eqhits} {CLOSE}
+#CLASS {hit_stats} {OPEN}
+#VARIABLE {eqstats} {}
+#CLASS {hit_stats} {CLOSE}
+
+
+#CLASS {equipment_tracking} {OPEN}
+
+#ALIAS {eqcommands} {
+    #ECHO {%h} {{ EQUIPMENT LIST }};
+    #ECHO {%-15s %-40s %s} {Command} {Syntax} {Description};
+    #ECHO {%-15s %-40s %s} {addeq} {addeq <name> <CurAC> <MaxAC> <loc>} {Adds item to list};
+    #ECHO {%-15s %-40s %s} {deleteeq} {deleteeq {item name}} {Removes item from list};
+    #ECHO {%-15s %-40s %s} {showeq} {} {Shows eq status};
+    #ECHO {%-15s %-40s %s} {showhits} {} {Shows eq hits};
+    #ECHO {%-15s %-40s %s} {addmultieq} {} {Automatically add eq on id.};
+    #ECHO {%-15s %-40s %s} {stopaddingeq} {} {Stop automatically adding eq on id};
+    #ECHO {%-15s %-40s %s} {gorepair} {} {Updates list and repairs eq.};
+    #ECHO {%h} {};
+}
+
+#ALIAS {addeq} {
+    #CLASS {eqhits} {READ} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+    #IF {"%3" == ""} {
+    	#SHOWME {Syntax: addeq name curAC maxAC location};
+    };
+    #ELSE {
+    	#VARIABLE {equipment[%1][curAC]} {%2};
+    	#VARIABLE {equipment[%1][maxAC]} {%3};
+        #IF {"%4" != ""} { #VARIABLE {equipment[%1][location]} {%4}; };
+		#SHOWME The item %1 has been added.;
+    };
+    #CLASS {eqhits} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+}
+
+#ALIAS {dmg_eq} {
+    #NOP Trip damage trigger for testing;
+    #SHOWME {\e[0;1;32m(%0 gets damaged)};
+}
+#ALIAS {dmg_eq} { #SHOWME {\e[0;1;32m(%0 gets damaged)}; }
+
+#ACTION {~^\e[0;1;32m(%* gets damaged)$} {
+    #CLASS {eqhits} {READ} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+    #IF {"%1" == "something"} {#NOP ;};
+    #ELSEIF {! &{equipment[%1]}} {
+        addeq {%1} {-1} {0};
+    };
+    #ELSE {
+        #MATH {equipment[%1][curAC]} {$equipment[%1][curAC] - 1};
+        #IF {$equipment[%1][maxAC] > 0 && $equipment[%1][curAC] <= 3} {
+            #ECHO {{%h} {1}} { %1 has $equipment[%1][curAC] of $equipment[%1][maxAC] AC };
+		};
+        #IF {&{equipment[%1][location]}} {
+            #CLASS {hit_stats} {READ} {$script_dir/Modules/hit_stats.dat};
+            #MATH {eqstats[total]} {$eqstats[total] + 1};
+            #MATH {eqstats[$equipment[%1][location]]} {$eqstats[$equipment[%1][location]] + 1};
+            #CLASS {hit_stats} {WRITE} {$script_dir/Modules/hit_stats.dat};
+        };
+	};
+    #MATH {eqhits} {$eqhits + 1};
+    #CLASS {eqhits} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+}
+#ALIAS {deleteeq} {
+    #IF {&equipment[%1]} {
+		#UNVARIABLE equipment[%1];
+		#CLASS {eqdata} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}};
+		#SHOWME The item %1 has been deleted.;
+    };
+    #ELSE {
+		#SHOWME The item %1 couldn't be found.;
+	};
+}
+
+#ALIAS {showeq} {
+	#ECHO {%h} {{ EQUIPMENT LIST }};
+	#FOREACH {$equipment[]} {item} {
+		#ECHO {%-15s %-4s %-4s %s} {$equipment[$item][location]} {$equipment[$item][curAC]} {$equipment[$item][maxAC]} {$item};
+	};
+	#SHOWME {Equipment hits: $eqhits};
+	#ECHO {%h} {};
+}
+
+#ALIAS {addmultieq} {
+   #CLASS {multieq} {OPEN};
+   #VARIABLE {eqname} {};
+   #VARIABLE {CurAC} {};
+   #VARIABLE {MaxAC} {};
+   #VARIABLE {wearloc} {};
+   #ACTION {~^Object '%*' is infused with your magic...$} {#VARIABLE {eqname} {%%1}};
+   #ACTION {~^Locations it can be worn:  %w} {#VARIABLE {wearloc} {%%1}};
+   #ACTION {~^\e[0;1;34mArmor class is %d of %d.$} {#VARIABLE {CurAC} {%%1};#VARIABLE {MaxAC} {%%2};addeq {$eqname} {$CurAC} {$MaxAC} {$wearloc}};
+   #ALIAS {stopaddingeq} {#CLASS {multieq} {KILL};};
+   #CLASS {multieq} {CLOSE};
+}
+#ALIAS {showhits} {
+   #SHOWME {Equipment hits: $eqhits};
+}
+
+#ALIAS {gorepair} {
+	#CLASS {eqdata} {READ} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+	#2 rem all;
+	repair all;
+	wear all;
+	#FOREACH {$equipment[]} {item} {
+		#VARIABLE {equipment[$item][curAC]} {$equipment[$item][maxAC]};
+	};
+	#VARIABLE {eqhits} {0};
+	#CLASS {eqdata} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+}
+
+#CLASS {equipment_tracking} {CLOSE}
+

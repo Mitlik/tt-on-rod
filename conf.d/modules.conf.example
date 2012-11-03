@@ -29,6 +29,11 @@
 #VARIABLE {SPELLCHK_ON} {$ON}
 #NOP #VARIABLE {mud_color[generic channel]} {$ansi_color_light_blue}
 
+#NOP Equipment Tracking
+#NOP ==================
+#VARIABLE {EQDMG_ON} {$ON}
+
+
 #VARIABLE {MISC_ON} {$ON}
 
 #CLASS {config} {CLOSE}
