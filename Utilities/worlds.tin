@@ -9,6 +9,14 @@
 #CLASS {worlddata} {READ} {$script_dir/Utilities/worlds.dat};
 
 #CLASS {worlds} {OPEN}
+#ALIAS {session_setup} {
+    #IF {$MSDP_ON} {
+        #SEND {${IAC}${DO}${MSDP}};
+        msdp_report;
+    };
+    #IF {$AFK} {goafk};
+    #split;
+}
 #ALIAS {recon} {
     #EVENT {SESSION DISCONNECTED} {#gts {#DELAY {recon_%%0} {cn %%0} {.200}}};
     #ZAP;
@@ -79,7 +87,8 @@
                 #${utility_worlds_connect} {
                     $worldlist[$utility_worlds_connect][name];
                     $worldlist[$utility_worlds_connect][pw];
-                    #READ $script_dir/Characters/$world[$utility_worlds_connect][name];
+                    #READ $script_dir/Characters/${worldlist[$utility_worlds_connect][name]}.tin;
+                    session_setup;
                 };
             };
 	};
