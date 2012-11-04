@@ -19,7 +19,7 @@
         #VARIABLE {repop_data[%0][max]} {$repop_data[%0][mean]};
         #VARIABLE {repop_data[%0][number]} {1};
     };
-    #ELSEIF {120 < $repop_duration && $repop_duration < 2*$repop_data[%0][mean]} {
+    #ELSEIF {120 < $repop_duration && $repop_duration < 1.4*$repop_data[%0][mean]} {
         #NOP {The general case, with some sanity checks};
         #MATH {repop_data[%0][mean]} {$repop_data[%0][mean] + (($repop_duration - $repop_data[%0][mean])/($repop_data[%0][number] + 1.000))};
         #IF {$repop_duration > $repop_data[%0][max]} {#VARIABLE {repop_data[%0][max]} {$repop_duration};};
