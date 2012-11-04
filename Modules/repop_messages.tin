@@ -1,5 +1,25 @@
 #CLASS {RepopMessages} {OPEN}
 
+#ACTION {~^${mud_color[generic channel]}%w says 'repop status'$} {
+    #VARIABLE {my_area} {$msdp_info[AREA_NAME]};
+    #MATH {my_min} {$repop_data[$my_area][min] + 0.5};
+    #FORMAT {my_min} {%d} {$my_min};
+    #MATH {my_max} {$repop_data[$my_area][max] + 0.5};
+    #FORMAT {my_max} {%d} {$my_max};
+    #MATH {my_mean} {$repop_data[$my_area][mean] + 0.5};
+    #FORMAT {my_mean} {%d} {$my_mean};
+    #VARIABLE {my_count} {$repop_data[$my_area][number]};
+    #VARIABLE {my_epoch} {$repop_data[$my_area][last_repop]};
+    say The last repop for $my_area happened @parse_tdiff{@get_tdiff{$my_epoch}} ago. Based on ${my_count} observations, repops here usually take @parse_tdiff{$my_mean} and range from @parse_tdiff{$my_min} to @parse_tdiff{$my_max}.;
+    #UNVARIABLE {my_area};
+    #UNVAR {my_min};
+    #UNVAR {my_mean};
+    #UNVAR {my_max};
+    #UNVAR {my_count};
+    #UNVAR {my_epoch};
+}
+
+
 #ACTION {~^${mud_color[repop]}The whirr of magical machinery is heard as the chessboard resets for its next player.$} {repop Glimwinkle's Chessboard}
 #ACTION {~^${mud_color[repop]}The incessant grinding sound of the windmill ceases for a moment, then clunks back into its regular rhythm.$} {repop glim wind}
 #ACTION {~^${mud_color[repop]}Dust settles within the temple, as another pilgrim searches for Immortality.$} {repop Florebit In Immortalis Iuvenis}
