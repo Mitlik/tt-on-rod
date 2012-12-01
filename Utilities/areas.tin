@@ -1,0 +1,198 @@
+#CLASS {areadata} {OPEN};
+#NOP {Setup some variables in the class, so they are properly written when the file doesn't exist};
+#VARIABLE {areas[DAG]} {{start}{DH[]} {notes}{} {dirs}{#4 s;w;n} {geo}{New Darkhaven} {astral}{}};
+#VARIABLE {geo[New Darkhaven]} {{start}{DH[]} {notes}{N/A} {dirs}{N/A} {astral}{N/A}};
+#CLASS {areadata} {CLOSE};
+#CLASS {areadata} {READ} {$script_dir/Utilities/areas.dat};
+
+#CLASS {areas} {OPEN}
+#ALIAS {areacommands} {
+    #ECHO {%h} { Area Commands };
+    #ECHO {%+15s | %s} {addarea} {Add an area or geo to the list for fast travel};
+    #ECHO {%+15s | %s} {areainfo} {Get full information for are or geo};
+    #ECHO {%+15s | %s} {arealist} {List all areas};
+    #ECHO {%+15s | %s} {areacommands} {Show aliases intended for users};
+    #ECHO {%+15s | %s} {delarea} {Remove an area or geo from the list};
+    #ECHO {%+15s | %s} {telldirs} {Tell how to get to an area};
+    #ECHO {%+15s | %s} {goto} {Travel to an area or geo};
+    #ECHO {%+15s | %s} {swinit} {Get start location and notes for an area or geo};
+    #ECHO {%h};
+}
+
+#ALIAS {addarea} {
+    #CLASS {areadata} {READ} {$script_dir/Utilities/areas.dat};
+    #FORMAT {arg} {%l} {%1};
+    #IF {"$arg" == "" || "%5" == ""} {
+        #SHOWME {Usage: <170>addarea geo Geo-Name, Starting-Point, Notes, Directions, [Astral-Point]};
+        #SHOWME {       <170>addarea Area-Name, Starting-Point, Notes, Directions, Geo, [Astral-Point]};
+    };
+    #ELSEIF {"$arg" == "geo" && ! &geo[%2]} {
+        #NOP {Make all lower case, but I think things will look better with caps};
+        #FORMAT {arg} {%l} {%2};
+        #NOP {Keep casing from user};
+        #VARIABLE {arg} {%2};
+        
+        #VARIABLE {geo[$arg][start]} {%3};
+        #VARIABLE {geo[$arg][notes]} {%4};
+        #VARIABLE {geo[$arg][dirs]} {%5};
+        #VARIABLE {geo[$arg][astral]} {%6};
+    };
+    #ELSEIF {! &areas[%1]} {
+        #NOP {Keep casing from user};
+        #VARIABLE {arg} {%1};
+        
+        #VARIABLE {areas[$arg][start]} {%2};
+        #VARIABLE {areas[$arg][notes]} {%3};
+        #VARIABLE {areas[$arg][dirs]} {%4};
+        #VARIABLE {areas[$arg][geo]} {%5};
+        #VARIABLE {areas[$arg][astral]} {%6};
+    };
+    #ELSEIF {"$arg" == "geo"} {
+        #SHOWME {addarea: Geo "$arg" already exists};
+    };
+    #ELSE {
+        #SHOWME {addarea: Area "$arg" already exists};
+    };
+    #CLASS {areadata} {WRITE} {$script_dir/Utilities/areas.dat};
+    #UNVARIABLE {arg};
+}
+
+#ALIAS {arealist} {
+    #ECHO {%h} { Area List };
+	#FORMAT {cols} {%C};
+	#MATH {space} {$cols - 42};
+	#ECHO {%-15s | %-6s | %-12s | %.${space}s} {Area Name} {Start} {Notes} {Directions};
+    #FOREACH {$areas[]} {area} {
+        #ECHO {%-15s | %-6s | %-12s | %.${space}s} {$area} {$areas[$area][start]} {$areas[$area][notes]} {$areas[$area][dirs]};
+    };
+    #ECHO {%h} { Geo List };
+    #FOREACH {$geo[]} {area} {
+        #ECHO {%-15s | %-6s | %-12s | %.${space}s} {$area} {$geo[$area][start]} {$geo[$area][notes]} {$geo[$area][dirs]};
+    };
+    #ECHO {%h}
+    #UNVARIABLE {cols};
+    #UNVARIABLE {space};
+    #UNVARIABLE {area};
+}
+
+#ALIAS {areainfo} {
+    #FORMAT {arg} {%l} {%1};
+    #IF {"%1" == ""} {
+        #SHOWME {Usage: <170>areainfo [geo] Area-Name};
+    };
+    #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
+		#ECHO {%h} { Geo: %2 };
+		#ECHO {Start: %-15s} {$geo[%2][start]};
+		#ECHO {Notes: %-15s Astral: %s} {$geo[%2][notes]} {$geo[%2][astral]};
+		#ECHO {Dirs: %s} {$geo[%2][dirs]};
+    };
+    #ELSEIF {&{areas[%1]}} {
+		#ECHO {%h} { Area: %1 };
+		#ECHO {Start: %-15s Geo:    %s} {$areas[%1][start]} {$areas[%1][geo]};
+		#ECHO {Notes: %-15s Astral: %s} {$areas[%1][notes]} {$areas[%1][astral]};
+		#ECHO {Dirs: %s} {$areas[%1][dirs]};
+    };
+    #ELSEIF {"$arg" == "geo"} {
+	    #SHOWME {areainfo: Couldn't find geo "%2"};
+	};
+    #ELSE {
+	    #SHOWME {areainfo: Couldn't find area "%1"};
+	};
+    #UNVARIABLE {arg};
+}
+
+#ALIAS {delarea} {
+    #CLASS {areadata} {READ} {$script_dir/Utilities/areas.dat};
+    #FORMAT {arg} {%l} {%1};
+    #IF {"%1" == ""} {
+        #SHOWME {Usage: <170>delarea [geo] area-name};
+    };
+    #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
+        #UNVARIABLE {geo[%2]};
+        #SHOWME {delarea: Deleted geo "%2"};
+        #CLASS {areadata} {WRITE} {$script_dir/Utilities/areas.dat};
+    };
+    #ELSEIF {&{areas[%1]}} {
+        #UNVARIABLE {areas[%1]};
+        #SHOWME {delarea: Deleted area "%1"};
+        #CLASS {areadata} {WRITE} {$script_dir/Utilities/areas.dat};
+    };
+    #ELSEIF {"$arg" == "geo"} {
+	    #SHOWME {delarea: Couldn't find geo "%2"};
+	};
+    #ELSE {
+	    #SHOWME {delarea: Couldn't find area "%1"};
+	};
+    #UNVARIABLE {arg};
+}
+
+#ALIAS {goto} {
+    #CLASS {areadata} {READ} {$script_dir/Utilities/areas.dat};
+    #FORMAT {arg} {%l} {%1};
+    #IF {"%1" == ""} {
+        arealist;
+        #SHOWME {Usage: <170>goto [geo] area-name};
+    };
+    #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
+        $geo[%2][dirs];
+    };
+    #ELSEIF {&{areas[%1]}} {
+        $areas[%1][dirs];
+    };
+    #ELSEIF {"$arg" == "geo"} {
+	    #SHOWME {goto: Couldn't find geo "%2"};
+	};
+    #ELSE {
+	    #SHOWME {goto: Couldn't find area "%1"};
+	};
+    #UNVARIABLE {arg};
+}
+
+#ALIAS {swinit} {
+    #CLASS {areadata} {READ} {$script_dir/Utilities/areas.dat};
+    #FORMAT {arg} {%l} {%1};
+    #IF {"%1" == ""} {
+        arealist;
+        #SHOWME {Usage: <170>swinit [geo] area-name};
+    };
+    #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
+        #SHOWME {Geo: %1};
+        #SHOWME {Start: $geo[%2][start]};
+        #SHOWME {Notes: $geo[%2][notes]};
+    };
+    #ELSEIF {&{areas[%1]}} {
+        #SHOWME {Area: %1};
+        #SHOWME {Start: $areas[%2][start]};
+        #SHOWME {Notes: $areas[%2][notes]};
+    };
+    #ELSEIF {"$arg" == "geo"} {
+	    #SHOWME {swinit: Couldn't find geo "%2"};
+	};
+    #ELSE {
+	    #SHOWME {swinit: Couldn't find area "%1"};
+	};
+    #UNVARIABLE {arg};
+}
+
+#ALIAS {telldirs} {
+    #CLASS {areadata} {READ} {$script_dir/Utilities/areas.dat};
+    #FORMAT {arg} {%l} {%1};
+    #IF {"%1" == ""} {
+        #SHOWME {Useage: <170>telldirs [geo] area-name};
+    };
+    #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
+        #SEND {say FROM $geo[%2][start] WITH $geo[%2][notes] GO $geo[%2][dirs]};
+    };
+    #ELSEIF {&{areas[%1]}} {
+        #SEND {say FROM $areas[%1][start] WITH $areas[%1][notes] GO $areas[%1][dirs]};
+    };
+    #ELSEIF {"$arg" == "geo"} {
+        #SHOWME {telldirs: Couldn't find geo "%2"};
+    };
+    #ELSE {
+        #SHOWME {telldirs: Couldn't find area "%1"};
+    };
+}
+
+#CLASS {areas} {CLOSE}
+
