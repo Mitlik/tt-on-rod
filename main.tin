@@ -25,6 +25,7 @@
 #READ $script_dir/Utilities/worlds.tin
 #READ $script_dir/Utilities/repop_tracking.tin
 #READ $script_dir/Utilities/msdp.tin
+#READ $script_dir/Utilities/areas.tin
 
 #NOP Read in Configuration
 #NOP =====================
