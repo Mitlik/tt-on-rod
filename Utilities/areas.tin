@@ -134,13 +134,13 @@
         #SHOWME {Usage: <170>goto [geo] area-name};
     };
     #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
-        #NOP {go_area variable to suppress bug where sending associated array inidices
+        #NOP {go_area variable to suppress bug where sending associated array indices
               with spaces directly to the mud causes unmatched brace errors.};
         #VARIABLE {go_area} {$geo[%2][dirs]};
         $go_area
     };
     #ELSEIF {&{areas[%1]}} {
-        #NOP {go_area variable to suppress bug where sending associated array inidices
+        #NOP {go_area variable to suppress bug where sending associated array indices
               with spaces directly to the mud causes unmatched brace errors.};
         #VARIABLE {go_area} {$areas[%1][dirs]};
         $go_area
@@ -152,6 +152,7 @@
 	    #SHOWME {goto: Couldn't find area "%1"};
 	};
     #UNVARIABLE {arg};
+    #UNVARIABLE {go_area};
 }
 
 #ALIAS {swinit} {
