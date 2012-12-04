@@ -134,10 +134,16 @@
         #SHOWME {Usage: <170>goto [geo] area-name};
     };
     #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
-        $geo[%2][dirs];
+        #NOP {go_area variable to suppress bug where sending associated array inidices
+              with spaces directly to the mud causes unmatched brace errors.};
+        #VARIABLE {go_area} {$geo[%2][dirs]};
+        $go_area
     };
     #ELSEIF {&{areas[%1]}} {
-        $areas[%1][dirs];
+        #NOP {go_area variable to suppress bug where sending associated array inidices
+              with spaces directly to the mud causes unmatched brace errors.};
+        #VARIABLE {go_area} {$areas[%1][dirs]};
+        $go_area
     };
     #ELSEIF {"$arg" == "geo"} {
 	    #SHOWME {goto: Couldn't find geo "%2"};
