@@ -23,13 +23,13 @@
         };
         #ELSE {
             #SEND {${IAC}${DONT}${MSDP}};
-		};
+        };
     };
     #ELSEIF {"$msdp_parameter" == "on"} {
         #VARIABLE {MSDP_ON} {$ON};
         #SEND {${IAC}${DO}${MSDP}};
         msdp_report;
-	};
+    };
     #ELSEIF {"$msdp_parameter" == "off"} {
         #VARIABLE {MSDP_ON} {$OFF};
         #SEND {${IAC}${DONT}${MSDP}};
@@ -54,7 +54,7 @@
         #SHOWME {    toggle    Toggle msdp};
         #SHOWME {    help      Show this message};
     };
-    #UVNARIABLE {msdp_parameter};
+    #UNVARIABLE {msdp_parameter};
 }
 
 #VARIABLE {msdp_reportable_variables} {{CHARACTER_NAME};{CLASS};{LEVEL};{HEALTH};
@@ -85,7 +85,7 @@
 #NOP #CONFIG {debug telnet} {on};
 
 #EVENT {IAC WILL MSDP} {
-        #SEND {$IAC$DO$MSDP\};
+    #SEND {$IAC$DO$MSDP\};
 }
 
 #EVENT {IAC SB MSDP} {
@@ -97,7 +97,7 @@
         #NOP Clear variable;
         #UNVARIABLE {msdp_info[%0]};
         #IF {"$msdp_value" != ""} {
-	    #FORALL {$msdp_value} {
+            #FORALL {$msdp_value} {
                 #VARIABLE {msdp_affect} {&0};
                 #REPLACE {msdp_affect} {,} {;};
                 #VARIABLE {msdp_level} {1};
@@ -107,8 +107,8 @@
                         #VARIABLE {msdp_level} {2};
                     };
                     #ELSE {
-	                #VARIABLE {msdp_info[%0][$msdp_spell]} {$msdp_item};
-	            };
+                        #VARIABLE {msdp_info[%0][$msdp_spell]} {$msdp_item};
+                    };
                 };
                 #NOP Clean up;
                 #UNVARIABLE {msdp_item};
@@ -117,10 +117,20 @@
             };
         };
         #UNVARIABLE {msdp_value};
-   };
-   #ELSE {
-      #VARIABLE {msdp_info[%0]} {%1};
-   };
+    };
+    #ELSEIF {"%0" == "OPPONENT_NAME" && "%1" == ""} {
+        #UNVARIABLE {msdp_info[OPPONENT_NAME]};
+        #UNVARIABLE {msdp_info[OPPONENT_HEALTH]};
+        #UNVARIABLE {msdp_info[OPPONENT_LEVEL]};
+    };
+    #ELSEIF {"%0" == "OPPONENT_LEVEL" && "%1" == "0"} {
+        #UNVARIABLE {msdp_info[OPPONENT_NAME]};
+        #UNVARIABLE {msdp_info[OPPONENT_HEALTH]};
+        #UNVARIABLE {msdp_info[OPPONENT_LEVEL]};
+    };
+    #ELSE {
+        #VARIABLE {msdp_info[%0]} {%1};
+    };
 }
 
 #NOP This event is generated at the end of an MSDP sub negotiation.;
