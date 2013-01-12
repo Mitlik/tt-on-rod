@@ -1,0 +1,165 @@
+#TICK {idle} {#cr} {300}
+#READ $script_dir/Modules/rolling.dat
+#CLASS {roll} {open}
+
+#NOP Setup
+#NOP =====
+#variable {str} {}
+#variable {dex} {}
+#variable {wis} {}
+#variable {int} {}
+#variable {cha} {}
+#variable {con} {}
+#variable {lck} {}
+
+#variable {minstat} {9}
+#variable {minstr} {$minstat}
+#variable {mindex} {$minstat}
+#variable {minint} {$minstat}
+#variable {minwis} {$minstat}
+#variable {mincha} {$minstat}
+#variable {mincon} {$minstat}
+#variable {minlck} {$minstat}
+
+
+#NOP Character Creation
+#NOP ==================
+#ALIAS {rollchar} {
+    #IF {@setclass{%4} || "%4" == "" || "%3" == "" || "%2" == "" || "%1" == ""} {
+        #SHOWME {Syntax: rollchar <sex> <race> <class> <rolltype>};
+    };
+    #ELSE {
+        #VARIABLE {sex} {%1};
+        #VARIABLE {race} {%2};
+        #VARIABLE {class} {%3};
+        #VARIABLE {rollip} {%4};
+    };
+};
+
+#ACTION {^Did I get that right, %w (Y/N)?}{
+    y;
+    $passwd;
+    $passwd;
+    a;
+    $class;
+    $race;
+    $sex;
+    n;
+    #DELAY {.5} {#cr};
+    #DELAY {1} {#cr};
+    #DELAY {1.5} {#SPLIT;gotoRoll};
+};
+
+#ALIAS {gotoRoll} {
+    help start;
+    experienced;
+    up;
+    say lighted path of the peaceful;
+    nw;
+    statrep;
+    conctRoller;
+}
+
+#ACTION {^Your base stats:    { ?}%d str { ?}%d int { ?}%d wis { ?}%d dex { ?}%d con { ?}%d cha { ?}%d lck.$} {
+#NOP #Act {Your base stats:    %1 str %2 int %3 wis %4 dex %5 con %6 cha %7 lck.} {
+    #VARIABLE {str} {%2};
+	#VARIABLE {int} {%4};
+	#VARIABLE {wis} {%6};
+	#VARIABLE {dex} {%8};
+	#VARIABLE {con} {%10};
+	#VARIABLE {cha} {%12};
+	#VARIABLE {lck} {%14};
+        #IF {@chkstats{}} {
+            getAuthed;
+        };
+        #ELSE {reroll};
+    };
+}
+
+#FUCNTION {setclass} {
+    #NOP {returns false to go forward rolling, true to force re-entry};
+    #IF {"%1" == ""} {
+        #SHOWME {Syntax: setclass <rolltype>};
+        #VARIABLE {result} {0};
+    };
+    #ELSE {
+        #LIST {classtypes} {fnd} {{%1}*} {clsind};
+        #IF {$clsind < 1} {
+            #SHOWME {Syntax: setclass <rolltype>};
+            displayclasses;
+            #VARIABLE {result} {1};
+        };
+        #ELSE {
+            roll%1;
+            #VARIABLE {result} {0};
+        };
+    };
+} 
+#ALIAS {displayclasses} {
+    #FOREACH {$classtypes[]} {class} {
+        #ECHO {<170>%s} {$class};
+    };
+}
+#ALIAS {fulldisplayclasses} {
+    
+    #FOREACH {$classtypes[]} {class} {
+        #UNVARIABLE {tmp_stats};
+        #FORALL {$classtypes[$class][]} {
+            #VARIABLE {tmp_stats} {${tmp_stats}\t&0: $classtypes[$class][&0]};
+		};
+        #ECHO {<170>%-10s %s} {${class}} {$tmp_stats};
+	};
+}
+
+#NOP Rolling
+#NOP =======
+#GAG {^Your character's base stats have been rerolled...$}
+#GAG {^                     New             Previous$}
+
+#ACTION      {~^Strength        \e[0;37m      {| }%d             \e[32m      {| }%d$} {#LINE GAG;#VARIABLE {str} {%2}};
+#ACTION {~^\e[1mDexterity       \e[0;37m      {| }%d             \e[32m      {| }%d$} {#LINE GAG;#VARIABLE {dex} {%2}};
+#ACTION {~^\e[1mIntelligence    \e[0;37m      {| }%d             \e[32m      {| }%d$} {#LINE GAG;#VARIABLE {int} {%2}};
+#ACTION {~^\e[1mWisdom          \e[0;37m      {| }%d             \e[32m      {| }%d$} {#LINE GAG;#VARIABLE {wis} {%2}};
+#ACTION {~^\e[1mCharisma        \e[0;37m      {| }%d             \e[32m      {| }%d$} {#LINE GAG;#VARIABLE {cha} {%2}};
+#ACTION {~^\e[1mConstitution    \e[0;37m      {| }%d             \e[32m      {| }%d$} {#LINE GAG;#VARIABLE {con} {%2}};
+#ACTION {~^\e[1mLuck            \e[0;37m      {| }%d             \e[32m      {| }%d$} {
+    #VARIABLE {lck} {%2};
+    #IF {@chkstats{}} {
+        getAuthed;
+    };
+    #ELSE {
+        displaystats;
+        reroll;
+    };
+    #LINE GAG;
+}
+
+#FUNCTION {chkstats} {
+    #IF {$str >= $minstr && $wis >= $minwis && $dex >= $mindex && $int >= $minint && $cha >= $mincha && $con >= $mincon && $lck >= $minlck} {
+        #BELL;
+        #DELAY {.5} {#BELL};
+        #DELAY {1} {#BELL};
+        #VARIABLE {result} {$TRUE};
+    };
+    #ELSE {
+        #VARIABLE {result} {$FALSE};
+    };
+}
+
+#ALIAS {displaystats} {#SHOWME {\nBase stats:\t $str str\t $int int\t $wis wis\t $dex dex\t $con con\t $cha cha\t $lck lck};}
+
+#ALIAS {cancel} {#UNACTION {Luck*};}
+#ALIAS {reset} {
+    #ACTION {Luck                  %d                   %d} {
+        #VARIABLE {lck} {%0};
+        #IF {@chkstats{}} {
+            #${curchar} getAuthed;
+        };
+        #ELSE {
+            #${curchar} reroll;
+        };
+    };
+}
+
+#CLASS {roll} {close}
+

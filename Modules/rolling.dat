@@ -1,0 +1,20 @@
+#CLASS {RollingData} {OPEN}
+
+#NOP Classes
+#NOP =======
+#VARIABLE {classtypes} {
+{avgpally}{{str}{17}{wis}{15}{dex}{14}{lck}{14}}{paladin}{{str}{17}{wis}{18}{dex}{14}{lck}{14}}{warrior}{{str}{18}{dex}{17}{lck}{16}}{mage}{{int}{18}{wis}{16}{dex}{16}}{thief}{{dex}{18}{str}{18}{lck}{16}}{vampire}{{int}{16}{dex}{18}{str}{16}{lck}{14}}{fathomer}{{dex}{18}{int}{16}{str}{16}{lck}{14}}{ranger}{{str}{18}{dex}{15}{wis}{16}}{cleric}{{wis}{18}{int}{16}{str}{16}{dex}{14}}{augurer}{{wis}{18}{str}{15}{dex}{15}{int}{14}{lck}{14}}{barbarian}{{str}{18}{dex}{17}{con}{16}{lck}{14}}
+}
+
+#NOP {
+#alias {rolldruid} {#variable {minwis} {18}; #variable {minstr} {$minstat}; #variable {minstr} {$minstat}}
+
+#alias {rollnephandi} {#variable {minint} {18}; #variable {minstr} {16}; #variable {mindex} {16}}
+
+#alias {rollbarbarian} {#variable {minstr} {18}; #variable {mindex} {16}; #variable {mincon} {18}}
+********** NOT COMPLETE CLASSES ********** }
+
+#var {rollnames} {{Rollara}{Rollera}{Rollira}{Rollora}{Rollura}{Rollaro}{Rollero}{Rolliro}{Rolloro}{Rolluro}{Xarckjh}{Feyelme}}
+
+#CLASS {RollingData} {CLOSE}
+
