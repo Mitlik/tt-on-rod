@@ -1,6 +1,8 @@
-#NOP This is the main file to this tinscript suite, this file should read in the
-#NOP rest without additional calls, unless you later wish to access services you
-#NOP have turned off in 'conf.d/modules.conf'.
+#NOP --------------------------------------------------------------------------
+#NOP This is the main file to this tinscript suite, this file should read in
+#NOP the rest without additional calls, unless you later wish to access
+#NOP services you have turned off in 'conf.d/modules.conf'.
+#NOP --------------------------------------------------------------------------
 
 #NOP This variable tells the rest of everything where to read from. This is the
 #NOP same directory you use to read in 'main'.
@@ -26,6 +28,9 @@
 #READ $script_dir/Utilities/repop_tracking.tin
 #READ $script_dir/Utilities/msdp.tin
 #READ $script_dir/Utilities/areas.tin
+#READ $script_dir/Utilities/events.tin
+#READ $script_dir/Utilities/misc.tin
+#READ $script_dir/Utilities/track_ip.tin
 
 #NOP Read in Configuration
 #NOP =====================

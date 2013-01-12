@@ -1,0 +1,5 @@
+#ALIAS {global} {
+    #ALL {%0};
+    #gts {%0};
+}
+

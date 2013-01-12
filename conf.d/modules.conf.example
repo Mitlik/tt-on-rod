@@ -35,6 +35,7 @@
 
 
 #VARIABLE {MISC_ON} {$ON}
+#VARIABLE {fTrackIp} {$ON}
 
 #CLASS {config} {CLOSE}
 

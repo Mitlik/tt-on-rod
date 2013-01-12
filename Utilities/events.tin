@@ -1,0 +1,24 @@
+#NOP --------------------------------------------------------------------------
+#NOP This file contains things that can only be declared once but may be useful
+#NOP in multiple scripts. As such this should be the single point of definition
+#NOP for these items. 
+#NOP --------------------------------------------------------------------------
+
+#EVENT {SESSION CONNECTED} {
+    #IF {$fTrackIp} {
+        global {
+            #LIST {my_sessions} {ADD} {%0};
+            #LIST {my_sessions} {SIZE} {current_ip};
+        };
+    };
+}
+
+#EVENT {SESSION DISCONNECTED} {
+    #IF {$fTrackIp} {
+        global {
+            #LIST {my_sessions} {FIND} {%0} {delete_session};
+            #LIST {my_sessions} {DELETE} {$delete_session};
+            #LIST {my_sessions} {SIZE} {current_ip};
+        };
+    };
+}
