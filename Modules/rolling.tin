@@ -32,7 +32,9 @@
         #VARIABLE {sex} {%1};
         #VARIABLE {race} {%2};
         #VARIABLE {class} {%3};
-        #VARIABLE {rollip} {%4};
+        #FOREACH {$classtypes[%4][]} {stat} {
+            #VARIABLE {min${stat}} {$classtypes[%4][$stat]};
+        };
     };
 };
 
@@ -45,35 +47,31 @@
     $race;
     $sex;
     n;
-    #DELAY {.5} {#cr};
-    #DELAY {1} {#cr};
-    #DELAY {1.5} {#SPLIT;gotoRoll};
 };
+#ACTION {^Your current appearance is:$} {#DELAY {0.5} {#CR};#DELAY {1} {#CR}}
 
-#ALIAS {gotoRoll} {
-    help start;
+#ACTION {~^\e[0;1;32mWater diverts around a large boulder.$} {
+    #SPLIT;
+    #SEND {help start};
     experienced;
     up;
     say lighted path of the peaceful;
     nw;
     statrep;
-    conctRoller;
 }
 
-#ACTION {^Your base stats:    { ?}%d str { ?}%d int { ?}%d wis { ?}%d dex { ?}%d con { ?}%d cha { ?}%d lck.$} {
-#NOP #Act {Your base stats:    %1 str %2 int %3 wis %4 dex %5 con %6 cha %7 lck.} {
-    #VARIABLE {str} {%2};
-	#VARIABLE {int} {%4};
-	#VARIABLE {wis} {%6};
-	#VARIABLE {dex} {%8};
-	#VARIABLE {con} {%10};
-	#VARIABLE {cha} {%12};
-	#VARIABLE {lck} {%14};
-        #IF {@chkstats{}} {
-            getAuthed;
-        };
-        #ELSE {reroll};
+#ACTION {^Your base stats:    %d{ ?} str %d{ ?} int %d{ ?} wis %d{ ?} dex %d{ ?} con %d{ ?} cha %d{ ?} lck.$} {
+    #VARIABLE {str} {%1};
+    #VARIABLE {int} {%3};
+    #VARIABLE {wis} {%5};
+    #VARIABLE {dex} {%7};
+    #VARIABLE {con} {%9};
+    #VARIABLE {cha} {%11};
+    #VARIABLE {lck} {%13};
+    #IF {@chkstats{}} {
+	getAuthed;
     };
+    #ELSE {reroll};
 }
 
 #FUCNTION {setclass} {
@@ -134,8 +132,18 @@
     #LINE GAG;
 }
 
+#ALIAS {getAuthed} {
+    #NOP ;
+}
+
 #FUNCTION {chkstats} {
-    #IF {$str >= $minstr && $wis >= $minwis && $dex >= $mindex && $int >= $minint && $cha >= $mincha && $con >= $mincon && $lck >= $minlck} {
+    #IF { $str >= $minstr && 
+          $wis >= $minwis && 
+          $dex >= $mindex && 
+          $int >= $minint && 
+          $cha >= $mincha && 
+          $con >= $mincon && 
+          $lck >= $minlck } {
         #BELL;
         #DELAY {.5} {#BELL};
         #DELAY {1} {#BELL};
@@ -150,14 +158,16 @@
 
 #ALIAS {cancel} {#UNACTION {Luck*};}
 #ALIAS {reset} {
-    #ACTION {Luck                  %d                   %d} {
-        #VARIABLE {lck} {%0};
+    #ACTION {~^\e[1mLuck            \e[0;37m      {| }%d             \e[32m      {| }%d$} {
+        #VARIABLE {lck} {%2};
         #IF {@chkstats{}} {
-            #${curchar} getAuthed;
+            getAuthed;
         };
         #ELSE {
-            #${curchar} reroll;
+            displaystats;
+            reroll;
         };
+        #LINE GAG;
     };
 }
 
