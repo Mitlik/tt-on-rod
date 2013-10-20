@@ -60,8 +60,6 @@
     #UNVARIABLE {utility_worlds_delete};
 }
 
-#ALIAS {connect} {cn %0};
-
 #ALIAS {cn} {
     #FORMAT {utility_worlds_connect} {%n} {%1};
     #gts {#FORMAT {utility_worlds_connect} {%n} {%1};};
