@@ -68,7 +68,7 @@
     #IF {"%1" == ""} {
         #ECHO {%h} {{ WORLD LIST }};
         #FOREACH {$worldlist[]} {world} {
-            #ECHO {%-20s %s %s %s} {$world} {$worldlist[$world][host]} {$worldlist[$world][port]} {$worldlist[$world][name]}
+            #ECHO {%-12s %+15s %+5s %+12s %.3s %-5s %s} {$world} {$worldlist[$world][host]} {$worldlist[$world][port]} {$worldlist[$world][name]} {$worldlist[$world][class]} {$worldlist[$world][owner]} {$worldlist[$world][comment]}
         }
     };
     #ELSEIF {&{worldlist[$utility_worlds_connect]}} {
