@@ -21,6 +21,7 @@ Getting Started
 After downloading the files, you'll want to remove the .example from the files 
 module.conf.example and system.conf.example and replace the information with
 your preferred setup. Then it's as simple as running:
+
     tt++ path/to/main.tin
 
 Once there you can add characters via the "addworld" command, and connect to
