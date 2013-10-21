@@ -1,0 +1,114 @@
+#CLASS {Adept} {OPEN}
+#NOP {Customizable variables};
+#VARIABLE {adept_num} {10}
+#VARIABLE {adept_direction} {west};         #NOP {Used for ranged spells};
+#VARIABLE {adept_weapon} {steel-longsword}; #NOP {Used for enchants};
+#VARIABLE {adept_trap} {globe};             #NOP {Used for remove trap};
+
+#NOP {Internal variables};
+#VARIABLE {adept_current_index} {}
+#VARIABLE {adept_remove_index} {}
+#VARIABLE {adept_name} {}
+#VARIABLE {adept_difference} {}
+#LIST {unadept} {CREATE};
+
+#LIST {adept_unsafe}  {CREATE} {teleport} {cosmos shift} {quantum spike}
+{ice blast} {acetum primus} {colour spray} {galvanic whip} {black hand} 
+{spectral furor} {sonic resonance} {black fist} {ethereal fist} {caustic font} 
+{magnetic thrust} {black lightning} {extradimensional por} {execrate};
+
+#LIST {adept_tricky} {CREATE} {remove trap} {blindness} {sleep} 
+{weaken} {chill touch} {farsight} {portal} {astral walk} {enchant weapon}
+{transport} {recharge};
+
+#ALIAS {adept} {
+    #IF {"%1" == "init"} {
+        #CLASS {Adept} {OPEN};
+        #ACTION {^  Spell: %* %%: %d   Max: %d   MinPos: %*} {
+            #FORMAT {tmp} {%p} {%%1};
+            #LIST {unadept} {FIND} {$tmp} {adept_current_index};
+            #IF {$adept_current_index <= 0} {#LIST {unadept} {ADD} {$tmp};};
+        };
+        #CLASS {Adept} {CLOSE};
+        slist unadept;
+    };
+    #ELSEIF {"%1" == "go"} {
+        #UNACTION {^  Spell: %* %%: %d   Max: %d   MinPos: %*};
+        #LIST {unadept} {SIZE} {list_size};
+        #IF {$list_size >= $adept_num} {
+            #LOOP 1 $adept_num adept_current_index {spell_handler $unadept[$adept_current_index]};
+        };
+        #ELSEIF {$list_size > 0} {
+            #LOOP 1 $list_size adept_current_index {spell_handler $unadept[$adept_current_index]};
+        };
+    };
+    #ELSEIF {"%1" == "stop" } {
+        #UNACTION {^  Spell: %* %%: %d   Max: %d   MinPos: %*};
+    };
+    #ELSEIF {"%1" == "safe"} {
+        #FOREACH {$adept_unsafe[%%0]} {spell} {
+            #LIST {unadept} {FIND} {$spell} {adept_remove_index};
+            #IF {$adept_remove_index > 0} {#LIST {unadept} {DELETE} {$adept_remove_index};};
+
+        };
+    };
+    #ELSEIF {"%1" == "remove"} {
+        #REGEXP {%0} {remove %*} {
+            #SHOWME {Removing: &1};
+            #LIST {unadept} {FIND} {&1} {adept_remove_index};
+            #IF {$adept_remove_index > 0} {#LIST {unadept} {DELETE} {$adept_remove_index};};
+        };
+    };
+    #ELSE {
+        #SHOWME Syntax: adept [command] [arg];
+        #SHOWME \nCOMMAND;
+        #SHOWME \t init\t- get unadept spells;
+        #SHOWME \t go\t- cast the first $adept_num spells;
+        #SHOWME \t stop\t- remove trigger created by "adept init";
+        #SHOWME \t safe\t- remove spells likely to cause trouble;
+        #SHOWME \t remove\t- remove user specified spells;
+    };
+}
+#ACTION {^You are now an adept of %*!  You gain %* bonus experience!$} {
+    #FORMAT {adept_name} {%.20s} {%1};
+    #LIST {unadept} {FIND} {$adept_name} {adept_remove_index};
+    #LIST {unadept} {DELETE} {$adept_remove_index};
+    #SHOWME {Removing %1};
+};
+#ALIAS {spell_handler} {
+    #NOP {
+        #IF {@isTricky{%0}} {
+            #FORMAT {adept_name} {%+20s} {%0};
+            #ACTION {^  Spell: $adept_name %%: %d   Max: %d   MinPos: %*} {
+                #MATH {adept_difference} {%%2-%%1};
+                #IF {$adept_difference <= 1} {
+                    #LIST {unadept} {FIND} {%0} {adept_remove_index};
+                    #LIST {unadept} {DELETE} {$adept_remove_index};
+                };
+                #UNACTION {^  Spell: $adept_name %%: %d   Max: %d   MinPos: %*};
+            };
+            slist '%0';
+        };
+    };
+    #SWITCH {"%0"} {
+        #CASE {"magic missile"} {cast '%0' $adept_direction;};
+        #CASE {"psionic blast"} {cast '%0' $adept_direction;};
+        #CASE {"transport"} {cast '%0' $adept_weapon self;};
+        #CASE {"recharge"} {cast '%0' $adept_weapon;};
+        #CASE {"midas touch"} {
+            cast 'continual light';
+            cast '%0' my.ball-light;
+        };
+        #CASE {"remove invis"} {
+            cast 'continual light';
+            cast invis my.ball-light;
+            cast '%0' my.ball-light;
+        };
+        #CASE {"enchant weapon"} {cast '%0' $adept_weapon};
+        #CASE {"denigrate"} {cast '%0' $adept_weapon};
+        #CASE {"remove trap"} {cast '%0' $adept_trap};
+        #DEFAULT {cast '%0' self};
+    };
+}
+#CLASS {Adept} {CLOSE};
+
