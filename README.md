@@ -18,8 +18,16 @@ Notes
 
 Getting Started
 ===============
-The simplest way to get started while documentation is back burner to
-functionality is to head into the project directory and run:
+After downloading the files, you'll want to remove the .example from the files 
+module.conf.example and system.conf.example and replace the information with
+your preferred setup. Then it's as simple as running:
+    tt++ path/to/main.tin
+
+Once there you can add characters via the "addworld" command, and connect to
+one of those worlds using the alias "cn".
+
+For further information, the simplest way to get started is to head into the 
+project directory and run:
 
     grep -r "ALIAS" . && grep -r "FUNCTION" .
 
