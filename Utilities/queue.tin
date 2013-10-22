@@ -1,0 +1,52 @@
+#CLASS {queue} {OPEN}
+
+#LIST {queues} {CREATE}
+
+#FUNCTION {isQueue} {
+#NOP Returns true if name is a queue;
+}
+
+#ALIAS {createQueue} {
+    #NOP Returns true if new queue is created;
+    #NOP If queue already exists returns false;
+    #IF {!@isQueue{%0}} {
+        #LIST {queues} {ADD} {%0};
+        #CLASS {queues} {OPEN}
+        #VARIABLE {%1};
+        #CLASS {queues} {CLOSE}
+    }
+    #ELSE {
+        #SHOWME {Error in createQueue: %1 is already a queue};
+    }
+}
+
+#NOP Remaining functions do not check if queue exists, that's the scripter's job;
+#FUCNTION {isEmpty} {
+#NOP Returns true if queue is empty;
+}
+
+#FUCNTION {queueLength} {
+#NOP Returns the length of a queue;
+}
+
+#ALIAS {enqueue} {
+#NOP Places argument in queue;
+}
+
+#ALIAS {requeue} {
+#NOP Places argument at beginning of queue;
+}
+
+#FUCNTION {dequeue} {
+#NOP Removes and returns item at beginning of queue;
+}
+
+#FUCNTION {pollQueue} {
+#NOP Returns item at beginning of queue;
+}
+
+#FUCNTION {inQueue} {
+#NOP Returns true if item is in queue;
+}
+
+#CLASS {queue} {CLOSE}
