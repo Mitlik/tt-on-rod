@@ -15,7 +15,8 @@
 #LIST {adept_unsafe}  {CREATE} {teleport} {cosmos shift} {quantum spike}
 {ice blast} {acetum primus} {colour spray} {galvanic whip} {black hand} 
 {spectral furor} {sonic resonance} {black fist} {ethereal fist} {caustic font} 
-{magnetic thrust} {black lightning} {extradimensional por} {execrate};
+{magnetic thrust} {black lightning} {extradimensional por} {execrate} 
+{energy drain};
 
 #LIST {adept_tricky} {CREATE} {remove trap} {blindness} {sleep} 
 {weaken} {chill touch} {farsight} {portal} {astral walk} {enchant weapon}
