@@ -1,7 +1,11 @@
 #CLASS {channels} {OPEN}
 
-#SUBSTITUTE {~^${mud_color[generic channel]}%w ordertalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ot}%1 ordertalk%2 '%3'} {6}
-#SUBSTITUTE {~^${mud_color[generic channel]}%* quest%? '%*'$} {${tt_fg_white}@gettime{} ${clr_qst}%1 quest%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w guildtalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_guild}%1 guildtalk%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w secttalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_sect}%1 secttalk%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w tribetalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_tribe}%1 tribetalk%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w clantalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_clan}%1 clantalk%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%w ordertalk%? '%*'$} {${tt_fg_white}@gettime{} ${clr_order}%1 ordertalk%2 '%3'} {6}
+#SUBSTITUTE {~^${mud_color[generic channel]}%* quest%? '%*'$} {${tt_fg_white}@gettime{} ${clr_quest}%1 quest%2 '%3'} {6}
 #SUBSTITUTE {~^${ansi_color_white}%w tell%? %w '%*'$} {${tt_fg_white}@gettime{} ${clr_tell}%1 tell%2 %3 '%4'} {6}
 #SUBSTITUTE {~^${mud_color[generic channel]}%w {ask|answer}%? '%*'$} {${tt_fg_white}@gettime{} ${clr_ask}%1 %2%3 '%4'} {6}
 
