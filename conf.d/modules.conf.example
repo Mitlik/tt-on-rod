@@ -8,8 +8,13 @@
 #NOP This changes the colors of channels since so many use the same color
 #VARIABLE {channel_highlight} {$ON}
 #VARIABLE {mud_color[generic channel]} {$ansi_color_light_blue}
-#VARIABLE {clr_ot} {${tt_fg_indigo}}
-#VARIABLE {clr_qst} {${tt_fg_azure}}
+#VARIABLE {clr_order} {${tt_fg_indigo}}
+#VARIABLE {clr_guild} {${tt_fg_orange}}
+#VARIABLE {clr_sect} {${tt_fg_orange}}
+#VARIABLE {clr_clan} {${tt_fg_orange}}
+#VARIABLE {clr_tribe} {${tt_fg_indigo}}
+#VARIABLE {clr_council} {${tt_fg_lime}}
+#VARIABLE {clr_quest} {${tt_fg_azure}}
 #VARIABLE {clr_chat} {${tt_fg_brown}}
 #VARIABLE {clr_ask} {${tt_fg_viridian}}
 #VARIABLE {clr_tell} {${tt_bg_grey}${tt_fg_black}}
@@ -33,7 +38,10 @@
 #NOP ==================
 #VARIABLE {EQDMG_ON} {$ON}
 
-
+#NOP MSDP parsing
+#NOP ============
+#VARIABLE {MSDP_ON} {$ON}
+#
 #VARIABLE {MISC_ON} {$ON}
 #VARIABLE {fTrackIp} {$ON}
 
