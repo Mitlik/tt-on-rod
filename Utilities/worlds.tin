@@ -15,7 +15,7 @@
         msdp_report;
     };
     #IF {$AFK} {goafk};
-    #split;
+    #SPLIT;
 }
 #ALIAS {recon} {
     #EVENT {SESSION DISCONNECTED} {#gts {#DELAY {recon_%%0} {cn %%0} {.200}}};
@@ -76,10 +76,12 @@
             #VAR {world} {$worldlist[$utility_worlds_connect]};
 
             #NOP This section was an attempt to use events to control the login process
-            #NOP {#EVENT {SESSION CONNECTED} {
-	        #IF {&{worldlist[%0][name]}} {#%0 $worldlist[%0][name]};
-	        #IF {&{worldlist[%0][pw]}} {#%0 $worldlist[%0][pw]}; 
-	    } nop};
+            #NOP {
+            #EVENT {SESSION CONNECTED} {
+	            #IF {&{worldlist[%0][name]}} {#%0 $worldlist[%0][name]};
+	            #IF {&{worldlist[%0][pw]}} {#%0 $worldlist[%0][pw]}; 
+	        }
+	        nop};
 
             #IF {&{worldlist[$utility_worlds_connect][pw]}} {
                 #${utility_worlds_connect} {
@@ -89,7 +91,7 @@
                     session_setup;
                 };
             };
-	};
+	    };
     };
     #ELSE {
         #SHOWME {Couldn't find world $utility_worlds_connect.};
