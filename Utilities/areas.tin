@@ -66,7 +66,7 @@
         #ECHO {%-15s | %-6s | %-12s | %.${space}s} {$area} {$areas[$area][start]} {$areas[$area][notes]} {$areas[$area][dirs]};
     };
     #ECHO {%h} { Geo List };
-    #FOREACH {$geo[]} {area} {
+    #FOREACH {*geo[]} {area} {
         #ECHO {%-15s | %-6s | %-12s | %.${space}s} {$area} {$geo[$area][start]} {$geo[$area][notes]} {$geo[$area][dirs]};
     };
     #ECHO {%h}
@@ -134,14 +134,12 @@
         #SHOWME {Usage: <170>goto [geo] area-name};
     };
     #ELSEIF {"$arg" == "geo" && &{geo[%2]}} {
-        #NOP {go_area variable to suppress bug where sending associated array indices
-              with spaces directly to the mud causes unmatched brace errors.};
+        #NOP {go_area variable to suppress bug where sending associated array indices with spaces directly to the mud causes unmatched brace errors.};
         #VARIABLE {go_area} {$geo[%2][dirs]};
         $go_area
     };
     #ELSEIF {&{areas[%1]}} {
-        #NOP {go_area variable to suppress bug where sending associated array indices
-              with spaces directly to the mud causes unmatched brace errors.};
+        #NOP {go_area variable to suppress bug where sending associated array indices with spaces directly to the mud causes unmatched brace errors.};
         #VARIABLE {go_area} {$areas[%1][dirs]};
         $go_area
     };
@@ -202,4 +200,3 @@
 }
 
 #CLASS {areas} {CLOSE}
-
