@@ -22,18 +22,20 @@
     #ECHO {%h} {};
 }
 
+#ALIAS {loadeq} {#CLASS {eqhits} {READ} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin}}
+
 #ALIAS {addeq} {
-    #CLASS {eqhits} {READ} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+    #CLASS {eqhits} {READ} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
     #IF {"%3" == ""} {
-    	#SHOWME {Syntax: addeq name curAC maxAC location};
+        #SHOWME {Syntax: addeq name curAC maxAC location};
     };
     #ELSE {
-    	#VARIABLE {equipment[%1][curAC]} {%2};
-    	#VARIABLE {equipment[%1][maxAC]} {%3};
+        #VARIABLE {equipment[%1][curAC]} {%2};
+        #VARIABLE {equipment[%1][maxAC]} {%3};
         #IF {"%4" != ""} { #VARIABLE {equipment[%1][location]} {%4}; };
 		#SHOWME The item %1 has been added.;
     };
-    #CLASS {eqhits} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+    #CLASS {eqhits} {WRITE} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
 }
 
 #ALIAS {dmg_eq} {
@@ -43,30 +45,31 @@
 #ALIAS {dmg_eq} { #SHOWME {\e[0;1;32m(%0 gets damaged)}; }
 
 #ACTION {~^\e[0;1;32m(%* gets damaged)$} {
-    #CLASS {eqhits} {READ} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+    #CLASS {eqhits} {READ} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
     #IF {"%1" == "something"} {#NOP ;};
     #ELSEIF {! &{equipment[%1]}} {
         addeq {%1} {-1} {0};
     };
     #ELSE {
         #MATH {equipment[%1][curAC]} {$equipment[%1][curAC] - 1};
-        #IF {$equipment[%1][maxAC] > 0 && $equipment[%1][curAC] <= 3} {
-            #ECHO {{%h} {1}} { %1 has $equipment[%1][curAC] of $equipment[%1][maxAC] AC };
+        #IF {$equipment[%1][maxAC] > 0 && $equipment[%1][curAC] <= 4} {
+            #ECHO {%h} { %1 has $equipment[%1][curAC] of $equipment[%1][maxAC] AC };
+            remove $equipment[%1][remname];
 		};
         #IF {&{equipment[%1][location]}} {
-            #CLASS {hit_stats} {READ} {$script_dir/Modules/hit_stats.dat};
+            #CLASS {hit_stats} {READ} {hit_stats.dat};
             #MATH {eqstats[total]} {$eqstats[total] + 1};
             #MATH {eqstats[$equipment[%1][location]]} {$eqstats[$equipment[%1][location]] + 1};
-            #CLASS {hit_stats} {WRITE} {$script_dir/Modules/hit_stats.dat};
+            #CLASS {hit_stats} {WRITE} {hit_stats.dat};
         };
 	};
     #MATH {eqhits} {$eqhits + 1};
-    #CLASS {eqhits} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+    #CLASS {eqhits} {WRITE} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
 }
 #ALIAS {deleteeq} {
     #IF {&equipment[%1]} {
 		#UNVARIABLE equipment[%1];
-		#CLASS {eqdata} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}};
+		#CLASS {eqhits} {WRITE} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
 		#SHOWME The item %1 has been deleted.;
     };
     #ELSE {
@@ -76,7 +79,7 @@
 
 #ALIAS {showeq} {
 	#ECHO {%h} {{ EQUIPMENT LIST }};
-	#FOREACH {$equipment[]} {item} {
+	#FOREACH {*equipment[]} {item} {
 		#ECHO {%-15s %-4s %-4s %s} {$equipment[$item][location]} {$equipment[$item][curAC]} {$equipment[$item][maxAC]} {$item};
 	};
 	#SHOWME {Equipment hits: $eqhits};
@@ -99,17 +102,16 @@
    #SHOWME {Equipment hits: $eqhits};
 }
 
-#ALIAS {gorepair} {
-	#CLASS {eqdata} {READ} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+#ALIAS {repairall} {
+	#CLASS {eqhits} {READ} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
 	#2 rem all;
 	repair all;
 	wear all;
-	#FOREACH {$equipment[]} {item} {
+	#FOREACH {*equipment[]} {item} {
 		#VARIABLE {equipment[$item][curAC]} {$equipment[$item][maxAC]};
 	};
 	#VARIABLE {eqhits} {0};
-	#CLASS {eqdata} {WRITE} {$script_dir/Characters/${msdp_info[CHARACTER_NAME]}Eq.tin};
+	#CLASS {eqhits} {WRITE} {$script_dir/Characters/${MSDP_CHARACTER_NAME}Eq.tin};
 }
 
 #CLASS {equipment_tracking} {CLOSE}
-
