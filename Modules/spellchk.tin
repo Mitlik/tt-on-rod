@@ -6,7 +6,7 @@
 	msdp_report;
     };
     #FORMAT {spell} {%l} {%2};
-    #VARIABLE {affs} {$msdp_info[AFFECTS]};
+    #VARIABLE {affs} {$MSDP_AFFECTS};
     #IF {"$spell" == "shields"} {
         #NOP sanc, shields, elemental supremacy, deathsphere, acidshield;
         #IF {&{affs[sanctuary]}} {
@@ -48,7 +48,7 @@
         #IF {&affs[acidward]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[acidward] acid}; };
         #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no acid}; };
         #IF {&affs[fly]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[fly] fly}; };
-        #ELSEIF {$msdp_info[RACE]} { #VARIABLE {spellchk_report} {${spellchk_report}, inf fly}; };
+        #ELSEIF {$MSDP_RACE} { #VARIABLE {spellchk_report} {${spellchk_report}, inf fly}; };
         #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no fly}; };
         #IF {&affs[protection]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[protection] prot}; };
         #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no prot}; };
@@ -57,9 +57,9 @@
 	};
     #ELSEIF {"$spell" == "safe"} {
         #NOP hide, fly, invis, aqua, scry;
-        #VARIABLE {affs} {$msdp_info[AFFECTS]};
+        #VARIABLE {affs} {$MSDP_AFFECTS};
         #IF {&affs[fly]} { #VARIABLE {spellchk_report} {$affs[fly] fly}; };
-        #ELSEIF {$msdp_info[RACE]} { #VARIABLE {spellchk_report} {inf fly}; };
+        #ELSEIF {$MSDP_RACE} { #VARIABLE {spellchk_report} {inf fly}; };
         #ELSE { #VARIABLE {spellchk_report} {no fly}; };
         #IF {&affs[invis]} { #VARIABLE {spellchk_report} {${spellchk_report}, $affs[invis] invis}; };
         #ELSE { #VARIABLE {spellchk_report} {${spellchk_report}, no invis}; };
@@ -86,8 +86,7 @@
 	    emote has $affs[$spell] $spell.;
 	};
     #ELSE {emote couldn't find ${spell}.};
-    #UNVARIABLE {affs} {$msdp_info[AFFECTS]};
+    #UNVARIABLE {affs} {$MSDP_AFFECTS};
 } {3}
 
 #CLASS {spellchk} {CLOSE}
-
