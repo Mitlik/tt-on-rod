@@ -35,7 +35,7 @@
     #CLASS {repop} {READ} {$script_dir/Utilities/repop.dat};
     #IF {"%0" == "" && $MSDP_ON} {
         #NOP {Assume current area};
-        #VARIABLE {sincerepop_area} {$msdp_info[AREA_NAME]};
+        #VARIABLE {sincerepop_area} {$MSDP_AREA_NAME};
     };
     #ELSEIF {"%0" == ""} {
         #NOP {Assume the last repop seen};
@@ -53,7 +53,7 @@
     #CLASS {repop} {READ} {$script_dir/Utilities/repop.dat};
     #IF {"%0" == "" && $MSDP_ON} {
         #NOP {Assume current area};
-        #VARIABLE {lastrepop_area} {$msdp_info[AREA_NAME]};
+        #VARIABLE {lastrepop_area} {$MSDP_AREA_NAME};
     };
     #ELSEIF {"%0" == ""} {
         #NOP {Assume the last repop seen};
@@ -67,4 +67,3 @@
     #UNVARIABLE {lastrepop_area};
 }
 #CLASS {utilities} {CLOSE}
-
