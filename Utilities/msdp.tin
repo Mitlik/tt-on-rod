@@ -1,92 +1,32 @@
 #CLASS {msdp} {OPEN}
 
-#FORMAT {IAC}  {%a} {255};
-#FORMAT {DONT} {%a} {254};
-#FORMAT {DO}   {%a} {253};
-#FORMAT {WONT} {%a} {252};
-#FORMAT {WILL} {%a} {251};
-#FORMAT {SB} {%a} {250};
-#FORMAT {SE} {%a} {240};
-
-#FORMAT {MSDP} {%a} {69};
-
-#FORMAT {VAR} {%a} {01};
-#FORMAT {VAL} {%a} {02};
-
-#ALIAS {msdp} {
-    #FORMAT {msdp_parameter} {%l} {%0};
-    #IF {"$msdp_parameter" == "toggle"} {
-        #MATH {MSDP_ON} {!$MSDP_ON};
-        #IF {$MSDP_ON} {
-            #SEND {${IAC}${DO}${MSDP}};
-            msdp_report;
-        };
-        #ELSE {
-            #SEND {${IAC}${DONT}${MSDP}};
-        };
-    };
-    #ELSEIF {"$msdp_parameter" == "on"} {
-        #VARIABLE {MSDP_ON} {$ON};
-        #SEND {${IAC}${DO}${MSDP}};
-        msdp_report;
-    };
-    #ELSEIF {"$msdp_parameter" == "off"} {
-        #VARIABLE {MSDP_ON} {$OFF};
-        #SEND {${IAC}${DONT}${MSDP}};
-    };
-    #ELSEIF {"$msdp_parameter" == "status"} {
-        #IF {$MSDP_ON} {
-            #SHOWME {MSDP Status: ON};
-        };
-        #ELSE {
-            #SHOWME {MSDP Status: OFF};
-        };
-    };
-    #ELSEIF {"$msdp_parameter" == "restart"} {
-    };
-    #ELSE {
-        #SHOWME {Usage: msdp <command>};
-        #SHOWME {  COMMANDS};
-        #SHOWME {    off       Turn off msdp};
-        #SHOWME {    on        Turn on msdp};
-        #SHOWME {    restart   Restart msdp};
-        #SHOWME {    status    Show the msdp status};
-        #SHOWME {    toggle    Toggle msdp};
-        #SHOWME {    help      Show this message};
-    };
-    #UNVARIABLE {msdp_parameter};
+#alias {sessionconnectevent}
+{
+     #variable TELNET[IAC]  \xFF;
+     #variable TELNET[DONT] \xFE;
+     #variable TELNET[DO]   \xFD;
+     #variable TELNET[WONT] \xFC;
+     #variable TELNET[WILL] \xFB;
+     #variable TELNET[SB]   \xFA;
+     #variable TELNET[SE]   \xF0;
+     #variable TELNET[MSDP] \x45;
+     #variable MSDP[VAR]   \x01;
+     #variable MSDP[VAL]   \x02;
+     #variable MSDP[TABLE_OPEN]  \x03;
+     #variable MSDP[TABLE_CLOSE] \x04;
+     #variable MSDP[ARRAY_OPEN]  \x05;
+     #variable MSDP[ARRAY_CLOSE] \x06;
+     #variable REPORTABLE_VARIABLES {{RACE};{COMBAT_STYLE};{CLASS};{AREA_NAME};{ROOM_EXITS};{ROOM_NAME};{ROOM_TERRAIN};{ROOM_EXITS};{ROOM_VNUM};{AFFECTS};{CHARACTER_NAME};{HEALTH};{HEALTH_MAX};{BLOOD};{OPPONENT_NAME};{OPPONENT_HEALTH};{OPPONENT_LEVEL};{MANA};{MANA_MAX};{MOVE};{MOVE_MAX};{WAIT_TIME}};
+     #nop Turn telnet debug off once everything works.;
+     #config {debug telnet} {off}
 }
 
-#VARIABLE {msdp_reportable_variables} {{CHARACTER_NAME};{CLASS};{LEVEL};{HEALTH};
-   {HEALTH_MAX};{MANA};{MANA_MAX};{BLOOD};{MOVEMENT};{MOVEMENT_MAX};{MONEY};
-   {HITROLL};{DAMROLL};{AC};{STR};{INT};{WIS};{DEX};{CON};{CHA};{LCK};
-   {STR_PERM};{INT_PERM};{WIS_PERM};{DEX_PERM};{CON_PERM};{CHA_PERM};{LCK_PERM};
-   {OPPONENT_NAME};{OPPONENT_LEVEL};{OPPONENT_HEALTH};{AREA_NAME};{WORLD_TIME};
-   {ROOM_NAME};{RACE};{AFFECTS};{WIMPY};{ALIGNMENT};{FAVOR};{WEIGHT}};
 
-#ALIAS {msdp_report} {
-    #VARIABLE {result} {$IAC$SB$MSDP${VAR}REPORT};
-    #FOREACH {$msdp_reportable_variables[]} {tmp} {
-        #VARIABLE {result} {$result${VAL}$tmp};
-    };
-    #SEND {$result$IAC$SE\};
-    #UNVARIABLE {tmp};
+#EVENT {IAC WILL MSDP}
+{
+     #send {$TELNET[IAC]$TELNET[DO]$TELNET[MSDP]\}
 }
 
-#ALIAS {msdp_list} {
-    #SEND {$IAC$SB$MSDP${VAR}LIST${VAL}%0$IAC$SE\};
-}
-
-#ALIAS {msdp_send} {
-    #SEND {$IAC$SB$MSDP${VAR}SEND${VAL}%0$IAC$SE\};
-}
-
-#NOP ******Turn telnet debug off once everything works as it's spammy.******;
-#NOP #CONFIG {debug telnet} {on};
-
-#EVENT {IAC WILL MSDP} {
-    #SEND {$IAC$DO$MSDP\};
-}
 
 #EVENT {IAC SB MSDP} {
     #NOP {Save all variables in associated array msdp_info.};
@@ -97,8 +37,8 @@
         #NOP Clear variable;
         #UNVARIABLE {msdp_info[%0]};
         #IF {"$msdp_value" != ""} {
-            #FORALL {$msdp_value} {
-                #VARIABLE {msdp_affect} {&0};
+            #FOREACH {$msdp_value} {msdp_temp} {
+                #VARIABLE {msdp_affect} {$msdp_temp};
                 #REPLACE {msdp_affect} {,} {;};
                 #VARIABLE {msdp_level} {1};
                 #FOREACH {$msdp_affect} {msdp_item} {
@@ -107,38 +47,62 @@
                         #VARIABLE {msdp_level} {2};
                     };
                     #ELSE {
-                        #VARIABLE {msdp_info[%0][$msdp_spell]} {$msdp_item};
+                        #VARIABLE {MSDP_%0[$msdp_spell]} {$msdp_item};
                     };
                 };
                 #NOP Clean up;
                 #UNVARIABLE {msdp_item};
                 #UNVARIABLE {msdp_level};
                 #UNVARIABLE {msdp_spell};
+                #UNVARIABLE {msdp_temp};
             };
         };
         #UNVARIABLE {msdp_value};
     };
-    #ELSEIF {"%0" == "OPPONENT_NAME" && "%1" == ""} {
-        #UNVARIABLE {msdp_info[OPPONENT_NAME]};
-        #UNVARIABLE {msdp_info[OPPONENT_HEALTH]};
-        #UNVARIABLE {msdp_info[OPPONENT_LEVEL]};
-    };
-    #ELSEIF {"%0" == "OPPONENT_LEVEL" && "%1" == "0"} {
-        #UNVARIABLE {msdp_info[OPPONENT_NAME]};
-        #UNVARIABLE {msdp_info[OPPONENT_HEALTH]};
-        #UNVARIABLE {msdp_info[OPPONENT_LEVEL]};
-    };
+#nop    #ELSEIF {"%0" == "OPPONENT_NAME" && "%1" == ""} {
+#nop        #UNVARIABLE {msdp_info[OPPONENT_NAME]};
+#nop        #UNVARIABLE {msdp_info[OPPONENT_HEALTH]};
+#nop        #UNVARIABLE {msdp_info[OPPONENT_LEVEL]};
+#nop    };
+#nop    #ELSEIF {"%0" == "OPPONENT_LEVEL" && "%1" == "0"} {
+#nop        #UNVARIABLE {msdp_info[OPPONENT_NAME]};
+#nop        #UNVARIABLE {msdp_info[OPPONENT_HEALTH]};
+#nop        #UNVARIABLE {msdp_info[OPPONENT_LEVEL]};
+#nop    };
     #ELSE {
-        #VARIABLE {msdp_info[%0]} {%1};
+        #VARIABLE {MSDP_%0} {%1};
     };
+    #showme {Sanc: $MSDP_AFFECTS[sanctuary] True: $MSDP_AFFECTS[true sight] Blind: $MSDP_AFFECTS[blindness]} {-3};
+    msdpevent
 }
 
-#NOP This event is generated at the end of an MSDP sub negotiation.;
 
-#EVENT {IAC SB MSDP IAC SE} {
-    #NOP {};
-    #NOP {show_prompt};
+#ALIAS {msdp_report}
+{
+     #nop Ask the server to report all keys inside REPORTABLE_VARIABLES;
+     #variable result {$TELNET[IAC]$TELNET[SB]$TELNET[MSDP]$MSDP[VAR]REPORT};
+     #foreach {*REPORTABLE_VARIABLES[]} {tmp}
+     {
+          #variable result {$result$MSDP[VAL]$tmp}
+     };
+     #send {$result$TELNET[IAC]$TELNET[SE]\}
+}
+
+#ALIAS {msdp_list}
+{
+     #send {$TELNET[IAC]$TELNET[SB]$TELNET[MSDP]$MSDP[VAR]LIST$MSDP[VAL]%0$TELNET[IAC]$TELNET[SE]\}
+}
+
+#ALIAS {msdp_send}
+{
+     #send {$TELNET[IAC]$TELNET[SB]$TELNET[MSDP]$MSDP[VAR]SEND$MSDP[VAL]%0$TELNET[IAC]$TELNET[SE]\}
+}
+
+#ALIAS {example}
+{
+     msdp_list COMMANDS;
+     msdp_list REPORTABLE_VARIABLES;
+     msdp_report
 }
 
 #CLASS {msdp} {CLOSE}
-
