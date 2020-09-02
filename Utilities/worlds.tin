@@ -11,11 +11,13 @@
 #CLASS {worlds} {OPEN}
 #ALIAS {session_setup} {
     #IF {$MSDP_ON} {
-        #SEND {${IAC}${DO}${MSDP}};
+        #nop #SEND {${IAC}${DO}${MSDP}};
+        sessionconnectevent;
         msdp_report;
     };
     #IF {$AFK} {goafk};
-    #SPLIT;
+    #SPLIT 0 2;
+    #config {repeat enter} {on}
 }
 #ALIAS {recon} {
     #EVENT {SESSION DISCONNECTED} {#gts {#DELAY {recon_%%0} {cn %%0} {.200}}};
@@ -65,7 +67,7 @@
     #gts {#FORMAT {utility_worlds_connect} {%n} {%1};};
     #IF {"%1" == ""} {
         #ECHO {%h} {{ WORLD LIST }};
-        #FOREACH {$worldlist[]} {world} {
+        #FOREACH {*worldlist[]} {world} {
             #ECHO {%-12s %+15s %+5s %+12s %.3s %-5s %s} {$world} {$worldlist[$world][host]} {$worldlist[$world][port]} {$worldlist[$world][name]} {$worldlist[$world][class]} {$worldlist[$world][owner]} {$worldlist[$world][comment]}
         }
     };
@@ -75,7 +77,7 @@
 	    #READ $script_dir/Utilities/worlds.dat;
             #VAR {world} {$worldlist[$utility_worlds_connect]};
 
-            #NOP This section was an attempt to use events to control the login process
+            #NOP This section was an attempt to use events to control the login process;
             #NOP {
             #EVENT {SESSION CONNECTED} {
 	            #IF {&{worldlist[%0][name]}} {#%0 $worldlist[%0][name]};
@@ -102,4 +104,3 @@
 #ACTION {~^Last connected from: %d.%d.%d.%d$} {#CR;#Delay {0.200} {#CR};}
 
 #CLASS {worlds} {CLOSE}
-
