@@ -41,9 +41,8 @@
 #NOP MSDP parsing
 #NOP ============
 #VARIABLE {MSDP_ON} {$ON}
-#
-#VARIABLE {MISC_ON} {$ON}
-#VARIABLE {fTrackIp} {$ON}
+#VARIABLE {MISC_ON} {$OFF}
+#VARIABLE {fTrackIp} {$OFF}
 
 #CLASS {config} {CLOSE}
 
